@@ -1,11 +1,11 @@
 # COMP6751-fall-2020
 
-COMP 6751 Natural Language Analysis Lecture Notes, Assignments and Project code.
+COMP 6751 Natural Language Analysis Lecture Notes, Labs, Quizzes, Projects and Readings.
 
 
 # Lecture topics covered
 
-|  Lecture  |  Topics  |
+|    Week   |  Topics  |
 | --------- | ---------|
 |     1     |   |
 |     2     |   |
@@ -21,18 +21,29 @@ COMP 6751 Natural Language Analysis Lecture Notes, Assignments and Project code.
 |     12    |   |
 
 
-# Assignments
-| Assignment #  |             Topics           |
-| ------------- | ---------------------------  |
-| 1             |     |
-| 2             |     |
-
-
 # Project
 | Project #     |             Topics           |
 | ------------- | ---------------------------  |
 | 1             |     |
+| 2             |     |
+| 3             |     |
+| 4             |     |
 
+# Reading
+| Reading #     |             Topics           |
+| ------------- | ---------------------------  |
+| 1             |     |
+| 2             |     |
+| 3             |     |
+| 4             |     |
+| 5             |     |
+| 6             |     |
+| 7             |     |
+| 8             |     |
+| 9             |     |
+| 10            |     |
+| review        |     |
 
 # Credits and References
+
 
