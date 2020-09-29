@@ -51,4 +51,6 @@ on the [website](http://www.nltk.org/book/ch03.html#tab-re-symbols).
 
 8. [Using integers/dates as terminals in NLTK parser](https://stackoverflow.com/questions/4148171/using-integers-dates-as-terminals-in-nltk-parser)
 
+9. [python - 如何在NLTK CFG中匹配整数？](https://www.coder.work/article/3169703)
 
+10. [List of Units / Measurements](https://www.hobbyprojects.com/dictionary_of_units.html)
