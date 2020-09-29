@@ -31,9 +31,9 @@ for s in sentences:
 # print(p.findall('2020-12-20'))
 # print(p.findall('2020/12/20'))
 
-# p = re.compile("(\w+\s\d{1,2}[a-zA-Z]{2},?\s?\d{4}?)")    #2
-# print(p.findall('December 20th 2020'))
-# print(p.findall('December 22nd, 2020'))
+p = re.compile("(\w+\s\d{1,2}[a-zA-Z]{2}\s?,?\s?\d{4}?)")    #2
+print(p.findall('December 20th 2020'))
+print(p.findall('December 22nd , 2020'))
 
 # p = re.compile("(the\s\d{1,2}[a-zA-Z]{2}\sof\s[a-zA-Z]+)")    #3
 # print(p.findall('the 12th of December'))
@@ -45,9 +45,9 @@ for s in sentences:
 # p = re.compile("(\w+\s\d{1,2}[a-zA-Z]{2})")   #5
 # print(p.findall('December 2nd'))
 
-p = re.compile("(\w+\s\d{1,2})")   #6
-print(p.findall('December 2'))
-print(p.findall('at 1.32'))
+# p = re.compile("(\w+\s\d{1,2})")   #6
+# print(p.findall('December 2'))
+# print(p.findall('at 1.32'))
 
 
 # pattern = "(\d{4}[-/]?\d{2}[-/]?\d{2})"\
