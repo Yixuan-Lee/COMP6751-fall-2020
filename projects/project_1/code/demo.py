@@ -9,5 +9,17 @@ pattern = r'''(?x)      # set flag to allow verbose regexps
 '''
 
 regex_tokenizer = RegexpTokenizer(pattern)
-
 print(regex_tokenizer.tokenize(text))
+print('------------------------------------------------------------')
+
+sent = "the fifth of November"
+print(nltk.pos_tag(nltk.word_tokenize(sent)))
+
+import re
+sentence1 = re.split('(/)', "2020/12/25")
+print(sentence1)
+
+
+from nltk import word_tokenize
+print(word_tokenize("John's big idea isn't all that bad."))
+print(nltk.pos_tag(word_tokenize("John's big idea isn't all that bad.")))
