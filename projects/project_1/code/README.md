@@ -49,6 +49,13 @@ on the [website](http://www.nltk.org/book/ch03.html#tab-re-symbols).
 
 7. [Using integers/dates as terminals in NLTK parser](https://stackoverflow.com/questions/4148171/using-integers-dates-as-terminals-in-nltk-parser)
 
-8. [Using integers/dates as terminals in NLTK parser](https://stackoverflow.com/questions/4148171/using-integers-dates-as-terminals-in-nltk-parser)
+8. [python - 如何在NLTK CFG中匹配整数？](https://www.coder.work/article/3169703)
 
+9. [List of Units / Measurements](https://www.hobbyprojects.com/dictionary_of_units.html)
+
+10. [re Regular expression operations documentation](https://docs.python.org/3/library/re.html#regular-expression-syntax)
+
+11. [re Regular expression operations documentation 2](https://docs.python.org/2/library/re.html)
+
+12. [In Python, how do I split a string and keep the separators?](https://stackoverflow.com/questions/2136556/in-python-how-do-i-split-a-string-and-keep-the-separators?lq=1)
 
