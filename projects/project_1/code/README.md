@@ -38,3 +38,17 @@ on the [website](http://www.nltk.org/book/ch03.html#tab-re-symbols).
 1. [Python regular expression (regex) match comma separated number - why does this not work?](https://stackoverflow.com/questions/16321007/python-regular-expression-regex-match-comma-separated-number-why-does-this-n)
 
 2. [Python | Split list into lists by particular value](https://www.geeksforgeeks.org/python-split-list-into-lists-by-particular-value/)
+
+3. [Pattern delimiter (?:pattern) in regular expressions](http://www.javascriptkit.com/javatutors/redev2.shtml)
+
+4. [RegexpTokenizer](https://www.nltk.org/_modules/nltk/tokenize/regexp.html)
+
+5. [NLTK实现文本切分](https://www.cnblogs.com/zrmw/p/10875684.html)
+
+6. [Regular Expression Syntax](https://docs.python.org/3/library/re.html#regular-expression-syntax)
+
+7. [Using integers/dates as terminals in NLTK parser](https://stackoverflow.com/questions/4148171/using-integers-dates-as-terminals-in-nltk-parser)
+
+8. [Using integers/dates as terminals in NLTK parser](https://stackoverflow.com/questions/4148171/using-integers-dates-as-terminals-in-nltk-parser)
+
+
