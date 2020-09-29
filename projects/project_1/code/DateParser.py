@@ -49,26 +49,3 @@ class DateParser:
             for tree in date_parser.parse(tokens):
                 print(tree)
                 # tree.draw()
-
-        # date examples
-        # sentence1 = [char for char in "2020/12/25"]
-        # sentence2 = "December 25th".split()
-        # sentence3 = "the twenty-fifth of December".split()
-        # sentence4 = "the 25th of December".split()
-        # print('9. ---------------------------------------------')
-        # print(sentence1)
-        # print(sentence2)
-        # print(sentence3)
-        # print(sentence4)
-        # for tree in date_parser.parse(sentence1):
-        #     print(tree)
-        #     tree.draw()
-        # for tree in date_parser.parse(sentence2):
-        #     print(tree)
-        #     tree.draw()
-        # for tree in date_parser.parse(sentence3):
-        #     print(tree)
-        #     tree.draw()
-        # for tree in date_parser.parse(sentence4):
-        #     print(tree)
-        #     tree.draw()
