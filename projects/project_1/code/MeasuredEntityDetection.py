@@ -39,7 +39,9 @@ class UnitEntityDetector:
                         # tup[0]: token
                         # tup[1]: tag
                         if tup[0] not in gazetteer[tup[1]]:
+                            # one of the words is not un unit gazetteer
                             in_gazetteer = False
+                            break
                     # if yes, then add the unit entity to the list
                     if in_gazetteer is True:
                         self.unit_entities.append(' '.join(word[0] for word in subtree.leaves()))

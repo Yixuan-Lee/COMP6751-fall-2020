@@ -12,7 +12,7 @@ class DateRecognizer:
             'July','August','September','October','November','December',
             'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday')
         self.date_patterns = "(\d{4}[-/]?\d{2}[-/]?\d{2})"\
-               "|(\w+\s\d{1,2}[a-zA-Z]{2},?\s?\d{4}?)"\
+               "|(\w+\s\d{1,2}[a-zA-Z]{2}\s?,?\s?\d{4}?)"\
                "|(the\s\d{1,2}[a-zA-Z]{2}\sof\s[a-zA-Z]+)"\
                "|(the\s\w+\sof\s\w+)"\
                "|(\w+\s\d{1,2}[a-zA-Z]{2})"\
@@ -22,12 +22,13 @@ class DateRecognizer:
     def recognize_dates(self) -> Set[str]:
         # extract different format of dates from the each sentence
         DateRecognizerCFG = r"""
-            DATE:   {<IN> <NNP> <CD> <,>? <CD>}     # E.g. December 12th, 2020
-                    {<IN> <DT> <NN> <IN> <NNP>}     # E.g. the twelfth of December
-                    {<IN> <DT> <CD> <IN> <NNP>}     # E.g. the 12th of December
-                    {<IN> <NNP> <CD>}               # E.g. in December 12th
+            DATE:   {<NNP> <CD> <,>? <CD>}          # E.g. December 12th 2020, December 12th , 2020
+                    {<DT> <NN> <IN> <NNP>}          # E.g. the twelfth of December
+                    {<DT> <CD> <IN> <NNP>}          # E.g. the 12th of December
+                    {<IN> <NNP> <CD>}               # E.g. on December 12th
                     {<NNP> <CD>}                    # E.g. March 30
-                    {<IN> <CD>}                     # E.g. in 2020, in 2020/12/12
+                    {<IN> <CD>}                     # E.g. in 2020, on 2020/12/12
+                    {<IN> <JJ>}                     # E.g. on 2020-12-12
         """
         cp = nltk.RegexpParser(DateRecognizerCFG)
 
@@ -37,7 +38,7 @@ class DateRecognizer:
             for subtree in tree.subtrees():
                 if subtree.label() == 'DATE':
                     tokens = [tup[0] for tup in subtree.leaves()]
-                    if '/' in tokens:
+                    if '/' in tokens or '-' in tokens:
                         date = ''.join(ch for ch in tokens)
                     else:
                         date = ' '.join(word for word in tokens)
@@ -53,7 +54,7 @@ class DateRecognizer:
     def date_validity_check(self, date_str: str, tokens: List[str]) -> bool:
         # traverse tokens to check if numbers are valid
         for token in tokens:
-            if token != ('/' or '-') and not token.isalnum():
+            if token not in ['/', '-', ','] and not token.isalnum():
                 # meaning that tokens may have float, special characters or non-alphanumeric characters
                 return False
 

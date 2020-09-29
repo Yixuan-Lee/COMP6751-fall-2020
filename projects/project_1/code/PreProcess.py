@@ -1,9 +1,8 @@
 import nltk
-import re   # regular expression
 from nltk.tokenize import RegexpTokenizer
 
 # download and import reuters corpus
-# TODO: uncomment this line before submission
+# TODO: uncomment this line if reuters is not downloaded
 # nltk.download('reuters')
 from nltk.corpus import reuters
 from typing import List
@@ -42,7 +41,7 @@ class Pipeline:
         title, body = self.raw_text.split('\n', 1)
 
         # check if split is successful
-        # title should be all uppercase
+        # check if title is in uppercase
         if title.upper() != title:
             print('Warning: this file does not have a title.')
             # consider all contents as body
@@ -70,14 +69,16 @@ class Pipeline:
 
             # get the title and body contents
             title, body = self.split_title_and_body()
-            print('1. ---------------------------------------------')
-            print('title:', title)
-            print('body:', body)
+            # print('Title and body:')
+            # print('title:', title)
+            # print('body:', body)
+            # print('---------------------------------------------')
 
             # reformat the body as the text in assignment description
             body = self.reformat_body(body)
-            print('2. ---------------------------------------------')
-            print('body:', body)
+            # print('Body reformation results:')
+            # print('body:', body)
+            # print('---------------------------------------------')
 
             ############################ Pipeline ############################
             # 1. tokenization
@@ -91,7 +92,7 @@ class Pipeline:
                       | [][.,;"'?():-_`]        # these are separate tokens; includes ], [
                       '''
             elif tokenizer_type == tokenizer_types[1]:
-                # use enhanced regular expression tokenizer based on basic regular expression
+                # use enhanced regular expression tokenizer based on basic regular expression tokenizer
                 pattern = r'''(?x)                  # set flag to allow verbose regexps
                         (?:[A-Z]\.)+                # abbreviations, e.g. U.S.
                       | \$?\d+(?:,\d+)?(?:\.\d+)?%? # currency or percentages or numbers that include a comma and/or a period e.g. $12.50, 52.25%, 30,000, 3.1415, 1,655.8
@@ -107,26 +108,29 @@ class Pipeline:
             regex_tokenizer = RegexpTokenizer(pattern)
             title_tokens = regex_tokenizer.tokenize(title)
             body_tokens = regex_tokenizer.tokenize(body)
-            print('3. ---------------------------------------------')
+            print('Tokenization results:')
             print(title_tokens)
             print(body_tokens)
-            print(len(title_tokens))
-            print(len(body_tokens))
+            # print(len(title_tokens))
+            # print(len(body_tokens))
+            print('---------------------------------------------')
 
             # 2. sentence splitting
             # ## use built-in tagged sentence (for clarify)
             body_sents = nltk.sent_tokenize(body)
-            print('4. ---------------------------------------------')
+            print('Sentences splitting results:')
             print(body_sents)
-            print(len(body_sents))
+            # print(len(body_sents))
+            print('---------------------------------------------')
             '''
             # ## split sentences based on the results of tokenization (this can replace nltk.sent_tokenize(body) above.)
             title_sent = [t for t in title_tokens]
             index_2_split = [index + 1 for index, value in enumerate(body_tokens) if value == '.']
             body_sents = [body_tokens[i:j] for i, j in zip([0] + index_2_split, index_2_split + ([len(body_tokens)] if index_2_split[-1] != len(body_tokens)  else []))]
-            print('5. ---------------------------------------------')
+            print('Sentences splitting results:')
             print(title_sent)
             print(body_sents)
+            print('---------------------------------------------')
             '''
             # 3. POS tagging
             pos_tags: List[List[str]] = list()
@@ -134,37 +138,45 @@ class Pipeline:
                 body_tokens = regex_tokenizer.tokenize(body_sent)
                 body_pos_tags = nltk.pos_tag(body_tokens)
                 pos_tags.append(body_pos_tags)
-            print('6. ---------------------------------------------')
+            print('Part-of-speech tagging results:')
             print(pos_tags)
+            print('---------------------------------------------')
 
             # 4. number normalization
             # has implemented in `pattern` during tokenization process
 
             # measured entity detection
             ud = UnitEntityDetector(pos_tags)
-            unit_entity = ud.unit_detection()
-            print('7. ---------------------------------------------')
+            unit_entity = ud.unit_detection()   # get a list of unit entities
+            print('Measured entity detection:')
             print(unit_entity)
+            print('---------------------------------------------')
 
             # 5. date recognition
             dr = DateRecognizer(pos_tags)
-            dates = dr.recognize_dates()
-            print('8. ---------------------------------------------')
+            dates = dr.recognize_dates()    # get a list of detected dates
+            print('Date recognition:')
             print(dates)
+            print('---------------------------------------------')
 
             # 6. date parsing
             dp = DateParser(body_sents, pos_tags)
-            dp.date_parse(dates)
+            print('Date parsing:')
+            dp.date_parse(dates)    # parse the dates detected by recognizer
 
         except Exception as ex:
             print(ex.args[0])
 
 
-
 if __name__ == '__main__':
-    fileid = 'training/555'
-    # initialization
-    PreProcess = Pipeline(fileid)
+    # TODO: change the fileid for different test cases
+    # test cases used in report, demo and testing
+    #      training/267
+    #      training/279
+    #      training/6
+    #      training/708
+    fileid = 'training/6'
+    PreProcess = Pipeline(fileid)   # initialization
 
     tokenizer_types = ['base', 'enhanced']
     PreProcess.pre_process(tokenizer_types[1], tokenizer_types)
