@@ -1577,6 +1577,7 @@ NNS	hectometres
 NNS millisiemens
 NNS	grams
 NNS weights
+NNS yen
 RB  ampere
 FW  de
 FW  vapor
