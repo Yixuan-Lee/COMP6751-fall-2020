@@ -59,3 +59,6 @@ on the [website](http://www.nltk.org/book/ch03.html#tab-re-symbols).
 
 12. [In Python, how do I split a string and keep the separators?](https://stackoverflow.com/questions/2136556/in-python-how-do-i-split-a-string-and-keep-the-separators?lq=1)
 
+13. [Units of Measurement Word Wall Vocabulary](https://www.teachstarter.com/au/teaching-resource/units-of-measurement-word-wall-vocabulary/)
+
+14. [百度百科-常用计量单位(中英文)名称及缩写](https://wenku.baidu.com/view/139feb97284ac850ad02428a.html#)
