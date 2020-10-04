@@ -98,7 +98,7 @@ class Pipeline:
                       | \$?\d+(?:,\d+)?(?:\.\d+)?%? # currency or percentages or numbers that include a comma and/or a period e.g. $12.50, 52.25%, 30,000, 3.1415, 1,655.8
                       | \w+(?:-\w+)*                # words with optional internal hyphens e.g. state-of-the-art
                       | \.\.\.                      # ellipsis ...
-                      | \'s                         # tokenize "'s" together
+                      | \'[sS]                      # tokenize "'s" together
                       | [][.,;"'?():-_`]            # these are separate tokens; include ], [
                       | \w+                         # word characters
                       '''
@@ -175,7 +175,7 @@ if __name__ == '__main__':
     #      training/279
     #      training/6
     #      training/708
-    fileid = 'training/6'
+    fileid = 'training/708'
     PreProcess = Pipeline(fileid)   # initialization
 
     tokenizer_types = ['base', 'enhanced']
