@@ -65,6 +65,7 @@ JJ  long
 JJ  metric
 JJ  military
 JJ  modified
+JJ  mln
 JJ  Julian
 JJ  molar
 NN  average
@@ -1577,6 +1578,7 @@ NNS	hectometres
 NNS millisiemens
 NNS	grams
 NNS weights
+NNS cents
 NNS yen
 RB  ampere
 FW  de
