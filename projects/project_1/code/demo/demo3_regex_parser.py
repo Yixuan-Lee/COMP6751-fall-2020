@@ -1,84 +1,6 @@
 import nltk
 
-sents = '''
-foot
-inches
-metre
-yard
-feet
-mile
-yards
-kilometres
-square inch
-centimetres
-square foot
-decimetres
-square yard
-acre
-hectare
-square mile
-hectares
-cubic inch
-cubic foot
-cubic yard
-pint
-oz
-quart
-pints
-litres
-gallons
-quarts
-peck
-grams
-ounce
-drams
-grains
-kilogram
-stone
-decametre
-hectometres
-grains
-grain
-ton
-bag
-bale
-bottle
-box
-dozen
-package
-packages
-piece
-pieces
-sheet
-unit
-system of units
-meter
-degree
-Celsius
-Fahrenheit
-newton
-kilopound
-square meter
-square millimeter
-volt
-ohm
-hour
-minute
-minutes
-second
-seconds
-army
-pack
-throng
-brood
-hive
-school
-swarm
-team
-field
-bar
-stack
-'''
+sents = 'There is 1 mln tonnes.'
 lib = sents.split('\n')[1:-1]
 
 lib_words = []
@@ -103,7 +25,7 @@ for s in sentences:
     words = nltk.word_tokenize(s)
     pos_tags = nltk.pos_tag(words)
     print(pos_tags)
-    tree = cp.parse(pos_tags)
+    # tree = cp.parse(pos_tags)
     # print(tree)
     # tree.draw()
 
