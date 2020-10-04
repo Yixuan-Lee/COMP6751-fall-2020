@@ -14,7 +14,7 @@ class UnitEntityDetector:
                 {<CD> <NN|NNP> <NN>? <NN|NNP|NNS>?}     # E.g. 2 Celsius heat units, 1 Celsius heat unit, 20 admiralty mile, 2000 AD
                 {<CD> <NN>{1,3}}                        # E.g. 1 blood alcohol level, 1 body mass index, 1 mach number, 1 absorbance unit, 1 mile  
                 {<CD> <NNS> <IN> <NN>}                  # E.g. 3 meters of water, 2 miles per hour
-                {<CD> <CD>? <NNS>}                            # E.g. two countries, 2 miles, 3 meters, 2 mln tonnes
+                {<CD> <CD>? <NNS>}                      # E.g. two countries, 2 miles, 3 meters, 2 mln tonnes, 2 billion yen
                 {<CD> <JJ> <NNS|NNP|NN|NNPS>{1,2}}      # E.g. 6 astronomical units, 1 alpha TE, 1 square meter, 3 cubic inch, 1 atomic mass unit, 1 British shipping ton
                 {<CD> <JJ> <JJ> <NNS>? <IN>? <NN|NNP>}  # E.g. 1 actual cubic centimeters per minute, 1 modified Julian NN
                 {<CD> <VBG> <JJ> <NN>}                  # E.g. 1 cooling degree day

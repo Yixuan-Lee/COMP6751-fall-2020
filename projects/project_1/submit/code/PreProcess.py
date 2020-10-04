@@ -2,9 +2,9 @@ import nltk
 from nltk.tokenize import RegexpTokenizer
 
 # TODO: comment this out if reuters corpus has downloaded on local
-nltk.download('reuters')    # download and import reuters corpus
+nltk.download('reuters')    # download reuters corpora
 
-from nltk.corpus import reuters
+from nltk.corpus import reuters # import reuters corpora
 from typing import List
 from MeasuredEntityDetection import UnitEntityDetector
 from DateRecognizer import DateRecognizer
@@ -112,16 +112,7 @@ class Pipeline:
             print('Sentences splitting results:')
             print(body_sents)
             print('---------------------------------------------')
-            '''
-            # ## split sentences based on the results of tokenization (this can replace nltk.sent_tokenize(body) above.)
-            title_sent = [t for t in title_tokens]
-            index_2_split = [index + 1 for index, value in enumerate(body_tokens) if value == '.']
-            body_sents = [body_tokens[i:j] for i, j in zip([0] + index_2_split, index_2_split + ([len(body_tokens)] if index_2_split[-1] != len(body_tokens)  else []))]
-            print('Sentences splitting results:')
-            print(title_sent)
-            print(body_sents)
-            print('---------------------------------------------')
-            '''
+
             # 3. POS tagging
             pos_tags: List[List[str]] = list()
             for body_sent in body_sents:
@@ -133,7 +124,7 @@ class Pipeline:
             print('---------------------------------------------')
 
             # 4. number normalization
-            # has implemented in `pattern` during tokenization process
+            # has implemented in `pattern` during tokenization step
 
             # measured entity detection
             ud = UnitEntityDetector(pos_tags)
@@ -152,7 +143,7 @@ class Pipeline:
             # 6. date parsing
             dp = DateParser(body_sents, pos_tags)
             print('Date parsing:')
-            dp.date_parse(dates)    # parse the dates detected by recognizer
+            dp.date_parse(dates) # parse the dates detected by date recognizer
 
         except Exception as ex:
             print(ex.args[0])
@@ -164,7 +155,7 @@ if __name__ == '__main__':
     #      training/267
     #      training/279
     #      training/6
-    fileid = 'training/6'
+    fileid = 'training/267'
     PreProcess = Pipeline(fileid)   # initialization
 
     tokenizer_types = ['base', 'enhanced']

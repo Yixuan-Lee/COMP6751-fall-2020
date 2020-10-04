@@ -20,8 +20,12 @@ There are 6 files in the submission:
 * README.txt
 
 In "PreProcess.py", there are two TODOs. By default, it downloads 
-the reuters corpus first to retrieve the files.
+the reuters corpora first to retrieve the files.
 
-Comment nltk.download out if reuters corpora has downloaded.
+TODO_1:
+Comment nltk.download line if reuters corpora has downloaded.
+
+TODO_2:
+Change fileid to try different test cases.
 
 ------------------------------------------------------------------
