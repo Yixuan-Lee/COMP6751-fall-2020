@@ -1,0 +1,7 @@
+S -> NP VP
+VP -> V NP | V
+NP -> NAME | ART N
+NAME -> 'John'
+V -> 'ate'
+ART -> 'the'
+N -> 'cat'

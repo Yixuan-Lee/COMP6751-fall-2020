@@ -1,0 +1,151 @@
+# % start S
+# ###################
+# Grammar Productions
+# ###################
+
+# S expansion productions
+S -> NP[NUM=?n] VP[NUM=?n] | NP[NUM=?n] COMMA VP[NUM=?n]
+S -> S COMMA CC S | S SEMICOL S | S COMMA P S
+S -> VP
+S -> NP[NUM=?n] TV[NUM=?n] WDT S
+S -> S COMMA WP VP
+
+# NP expansion productions
+NP[NUM=?n] -> N[NUM=?n] | PropN[NUM=?n] | ProN[NUM=?n] | N NP[NUM=?n] | PropN NP[NUM=?n]
+NP[NUM=?n] -> Det[NUM=?n] NP[NUM=?n] | Det[NUM=?n] NP[NUM=?n] | Det[NUM=?n] NP[NUM=?n] PP
+NP[NUM=?n] -> JJ NP[NUM=?n] | JJ JJ 'and' JJ NP
+NP[NUM=?n] -> Det[NUM=?n] NP[NUM=?n] COMMA APP
+NP[NUM=pl] -> CD NP[NUM=pl] | '$' CD
+NP[NUM=sg] -> N CD | PropN PropN CD
+NP[NUM=pl] -> N COMMA NP | PropN COMMA NP | N COMMA 'and' NP | PropN 'and' NP
+NP -> 'the' IV[TENSE=pastpart] | NP VP[TENSE=pastpart] | 'the' JJ 'of' NP
+NP -> N P NP
+NP -> N "'s" NP | PropN "'s" NP
+NP -> NP COMMA PP
+
+# VP expansion productions
+VP[TENSE=?t, NUM=?n] -> IV[TENSE=?t, NUM=?n]
+VP[TENSE=?t, NUM=?n] -> TV[TENSE=?t, NUM=?n] NP
+VP[TENSE=?t, NUM=?n] -> AUX[TENSE=?t, NUM=?n] NP | AUX PP
+VP[TENSE=?t, NUM=?n] -> AUX[TENSE=?t, NUM=?n] VP[TENSE=pastpart] | AUX[TENSE=?t, NUM=?n] VP[TENSE=presentprog]
+VP[TENSE=?t, NUM=?n] -> VP[TENSE=?t, NUM=?n] PP | VP[TENSE=?t, NUM=?n] P
+VP -> VP INF | AUX INF
+VP -> RB IV[TENSE=?t, NUM=?n] | RB TV[TENSE=?t, NUM=?n] | IV[TENSE=?t, NUM=?n] RB | TV[TENSE=?t, NUM=?n] RB
+
+# PP expansion productions
+PP -> P NP | RB P N
+PP -> P CD
+PP -> P NP PP
+
+# Infinitive expansion productions
+INF -> 'to' VP[TENSE=inf]
+
+# Apposition expansion productions
+APP -> NP[NUM=?n] PP
+
+
+# ###################
+# Lexical Productions
+# ###################
+
+# Determiner
+Det[NUM=sg] -> 'this' | 'every' | 'an' | 'a' | 'A'
+Det[NUM=pl] -> 'these' | 'all' | 'several' | 'some'
+Det -> 'the' | 'his' | 'The' | 'Its' | 'its' | 'His'
+
+# Auxiliary Verb
+AUX[TENSE=pres, NUM=sg] -> 'is' | 'has' | 'does'
+AUX[TENSE=pres, NUM=pl] -> 'are' | 'Are'
+AUX[TENSE=past, NUM=sg] -> 'was' | 'had' | 'did'
+AUX[TENSE=past, NUM=pl] -> 'were'
+AUX[TENSE=inf] -> 'be'
+
+# Modal
+MD[TENSE=future] -> will
+
+# Punctuation
+COMMA -> ','
+
+SEMICOL -> ';'
+
+# Proper Nouns
+PropN[NUM=sg] -> 'Preem' | 'Palver' | 'Preem Palver' | 'Isaac Asimov' | 'Foundation' | 'White Sox' | 'Harry M. Miller'
+PropN[NUM=sg] -> 'Voss'| 'Jerry Reinsdorf' | '2005' | 'World' | 'Saint Joan of Arc' | 'White' | 'Saint' | 'Joan of' | 'Arc'
+PropN[NUM=sg] -> 'JetBlue' | 'Arab' | 'Ahvaz' | 'Al Jazeera' | '1st Marine' | 'Division' | 'Rutbah' | 'Shiite' | 'Kurdish'
+PropN[NUM=sg] -> 'Sunni' | 'Prime' | 'Minister' | 'Iyad Allawi of Iraq' | 'Wednesday' | 'Iyad Allawi' | 'Australia' | 'Muslims'
+PropN[NUM=sg] -> 'Best Party of Allah' | 'Australian' | 'Capital' | 'Territory' | 'Mr.' | 'Kennedy' | 'Laurie Garner'
+PropN[NUM=sg] -> 'North Carolina' | 'Dutch' | 'Christiaan Huygens' | 'Titan' | 'Huygens' | 'ESA' | 'Kaew Panjapetchkaew'
+PropN[NUM=sg] -> 'Muslim' | 'Dr.' | 'Jayant Patel' | 'U.S.' | 'Toni Hoffman' | 'Patel' | 'Edward Philips' | 'Toby Gascon'
+PropN[NUM=sg] -> 'Greenpeace' | 'Habib' | 'Gaza' | 'Minnesota Gophers' | 'Harvard University' | 'Malaysia' | 'Environment'
+PropN[NUM=sg] -> 'Adenan Satem' | 'Commodities' | 'Peter Chin' | 'Indonesia' | 'Medan' | 'Dan Collins' | 'Boeing' | 'Google'
+PropN[NUM=sg] -> 'Time Warner' | 'German' | 'Rewe' | 'Penny Market' | 'Romania' | 'Germany' | 'TNT' | 'Flight' | 'New York'
+PropN[NUM=sg] -> 'JFK Airport' | 'Burbank' | 'California' | 'Boris Franz Becker' | 'July' | 'Wimbledon'
+PropN[NUM=pl] -> 'Series' | 'Iranians' | 'Houston Astros' | 'Becker'
+
+ProN[NUM=sg] -> 'nothing' | 'it' | 'he' | 'him' | 'you'
+ProN[NUM=pl] -> 'They' | 'themselves' | 'they'
+#---------------------------------------
+PropN[NUM=sg] -> 'Boris Franz Becker' | 'Wimbledon' | 'Becker' | 'White House' | 'Scott McClellan' | 'US'
+PropN[NUM=sg] -> 'President' | 'George W Bush' | 'Iraq' | 'Mr' | 'McClellan' | 'Bush' | 'Hurricane' | 'Katrina'
+PropN[NUM=sg] -> 'Australia' | 'Japan'
+
+# Nouns
+N[NUM=sg] -> 'character' | 'part' | 'sci-fi' | 'writer' | 'screenplay' | 'process' | 'championship' | 'ring' | 'owner'
+N[NUM=sg] -> 'brigade' | 'mission' | 'money' | 'information' | 'combatant' | 'flight' | 'takeoff' | 'city'
+N[NUM=sg] -> "'suspension" | "'" | 'aircraft' | 'division' | 'insurgency' | 'assassin' | 'bomb' | '11pm' | 'night'
+N[NUM=sg] -> 'time' | 'attacker' | 'police' | 'party' | 'citizen' | 'probe' | 'astronomer' | 'inventor' | 'monk'
+N[NUM=sg] -> 'government' | 'inquiry' | 'murder' | 'negligence' | 'harm' | 'cancer' | 'Incarceration' | 'September'
+N[NUM=sg] -> 'woman' | 'mayor' | 'election' | 'strip' | 'hockey' | 'team' | 'forestry' | 'minister' | 'environment'
+N[NUM=sg] -> 'year' | 'subsidiary' | 'retail' | 'corporation' | 'discount' | 'pickup' | 'truck' | 'mortar' | 'fire'
+N[NUM=sg] -> 'route' | 'nose' | 'gear' | 'tennis' | 'player' | 'champion' | 'history'
+N[NUM=pl] -> 'women' | 'members' | 'weapons' | 'provisions' | 'men' | 'protests' | 'Personnel' | 'personnel' | 'leaders'
+N[NUM=pl] -> 'people' | 'conditions' | 'attacks' | 'officials' | 'revenues' | 'stores' | 'rounds' | 'malfunctions' | 'singles'
+#------------------------------------------
+N[NUM=sg, PERSON=3, -WH] ->  'player' | 'spokesman'
+N[NUM=pl, PERSON=3, -WH] -> 'men'
+N[NUM=sg, -WH] -> 'tennis' | 'champion' | 'history' | 'war' | 'book' | 'propaganda' | 'campaign' | 'handling' | 'intervention'
+N[NUM=sg, -WH] -> 'role' | 'world' | 'stage' | 'call' | 'freedom' | 'tyranny'
+N[NUM=pl, -WH] -> 'singles' | 'countries' | 'forces'
+
+
+# Preposition
+P -> 'of' | 'by' | 'to' | 'for' | 'on' | 'in' | 'with' | 'down' | 'after' | 'from' | 'near' | 'around' | 'versus' | 'off'
+P -> 'at' | 'en'
+
+# Coordinating Conjunction
+CC -> 'but' | 'and'
+
+# Adjective
+JJ -> 'fictional' | 'Outgoing' | 'local' | 'political' | 'Indian-born' | 'chronic' | 'physical' | 'mental' | 'several' | 'middle' | 'youngest'
+
+# Adverb
+RB -> 'overall' | 'soon' | 'also' | 'shortly' | 'disproportionally'
+
+# Number
+CD -> '17' | '135' | '292' | '1655' | '87' | '11' | '3.2bn' | '42bn' | '7' | '1985'
+
+# Verb
+IV[TENSE=inf] -> 'work' | 'meet' | 'Work'
+TV[TENSE=inf] -> 'win' | 'obtain' | 'represent' | 'open'
+
+IV[TENSE=pres,  NUM=sg] -> 'comes' | 'resides' | 'belongs' | 'works' | 'plans'
+TV[TENSE=pres, NUM=sg] -> 'causes' | 'generates'
+
+IV[TENSE=pres,  NUM=pl] -> '!'
+TV[TENSE=pres, NUM=pl] -> 'claim' | 'back' | 'play'
+
+IV[TENSE=past] -> 'came' | 'collected' | 'began' | 'grew' | 'cared' | 'crashed' | 'worked' | 'died' | 'participated'
+TV[TENSE=past] -> 'invented' | 'wrote' | 'helped' | 'named' | 'assisted' | 'incited' | 'escaped' | 'discovered' | 'killed'
+TV[TENSE=past] -> 'won' | 'defeated' | 'opened' | 'encountered' | 'became'
+
+IV[TENSE=pastpart] -> 'wounded' | 'protested' | 'based' | 'killed' | 'formed' | 'named' | 'built' | 'charged' | 'set'
+IV[TENSE=pastpart] -> 'loaded' | 'attacked' | 'focused'
+TV[TENSE=pastpart] -> 'approached' | 'recommended' | 'elected'
+
+TV[TENSE=presentprog] -> 'transporting' | 'causing'
+
+# wh-determ.
+WDT -> 'that'
+
+# wh-pronoun
+WP -> 'who'
