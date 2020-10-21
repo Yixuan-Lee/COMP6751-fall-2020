@@ -1,0 +1,36 @@
+Questions:
+
+1. In assignment descriptions, for the sentence example 7, 8, 9,
+they are consists of multiple sub complete sentences. So when I print the
+parse tree for the example 7, 8, 9, should I
+    1) treat them as a whole or
+    2) I print the parse tree of each sub complete sentences separately.
+
+If  1), I need to write my grammar rules like: S -> S . S
+If  2), I need to call sentence_tokenize, and parse each sentence.
+
+Answer:
+
+
+2. Can I use nltk.tag.stanford.StanfordNERTagger in namedd entity module?
+
+Answer:
+
+
+3. In the report, what modules should I include? Should I write a Demo report
+like Project 1?
+    1)
+
+Answer:
+
+
+4. Example sentence 2, 3, 4, 5, is it correct to generate 2 parse trees since there
+are 2 possible explanation due to PP attachment?
+
+Answer:
+
+
+5. Do I have to use Date Recognizer in project 1?
+
+Answer:
+
