@@ -2,7 +2,7 @@ import os
 import nltk
 from nltk import sent_tokenize, word_tokenize, load_parser, FeatureEarleyChartParser
 from nltk.tag.stanford import StanfordNERTagger, StanfordPOSTagger
-from typing import List, Tuple
+from typing import List, Tuple, Set
 
 
 class Parser:
@@ -20,7 +20,7 @@ class Parser:
         """
         for tree in self.cp.parse(tokens):
             print(tree)     # print the tree
-            # tree.draw()     # display the tree diagram
+            tree.draw()     # display the tree diagram
 
 
 class Pipeline:
@@ -47,18 +47,19 @@ class Pipeline:
 
     def reformat_raw(self) -> str:
         """
-        If text in raw data file contains multiple lines, then merge into 1 lines split by a space.
-        :return one-line reformed body
+        If text in raw data file contains multiple lines, then merge into 1 lines separated by a space.
+        :return one-line reformed raw text
         """
         reformed_raw = ""
         for line in self.raw.split('\n'):
             reformed_raw += line.strip() + ' '
         return reformed_raw
 
-    def part_of_speech_tagging(self, words: List[str]) -> List[Tuple[str, str]]:
+    def part_of_speech_tagging(self, words: List[str], multi_word_name_entities: Set[str]) -> List[Tuple[str, str]]:
         """
         perform part-of-speech tagging using StanfordPOSTagger
-        :param sent: a sentence
+        :param words: a list of words in a sentence
+        :param multi_word_name_entities: a set of multi-word name entities
         :return: part-of-speech tag of the sentence
         """
         # define pos tagger
@@ -70,45 +71,89 @@ class Pipeline:
         normal_pos_tag = nltk.pos_tag(words[:-1])   # omit the last period
         # print('Stanford POS tagging:', stan_pos_tag)        # for comparison
         # print('nltk.pos_tag tagging:', normal_pos_tag)      # for comparison
-        return normal_pos_tag
 
-    def name_entity_module(self, word_list: List[str]) -> List[str]:
+        def post_treatment(stan_pos_tag: List[Tuple[str, str]], norm_pos_tag: List[Tuple[str, str]], multi_word_name_entities: Set[str]) -> None:
+            """
+            combine the multi-word name entities
+            since nltk.pos_tag label multi-word name entities together, so I correct stan_pos_tag by using norm_pos_tag
+            the problem of norm_pos_tag is that it usually mislabels words, and that's why I prefer to use StanfordPOStagger
+            :param stan_pos_tag: a list of pos-tags of sentences using stanford pos tagger
+            :param norm_pos_tag: a list of pos-tags of sentences using nltk.pos_tag
+            """
+            stan_len = len(stan_pos_tag)
+            norm_len = len(normal_pos_tag)
+            stan_i = 0
+            norm_i = 0
+            while stan_i < stan_len and norm_i < norm_len:
+                stan_word, stan_pos = stan_pos_tag[stan_i]
+                norm_word, norm_pos = norm_pos_tag[norm_i]
+                # check if word exists in multi_word_name_entities
+                if stan_word == norm_word.split(' ')[0] and norm_word in multi_word_name_entities:
+                    # scan the following words in stan_pos_tag and combine if they can form a multi-word entity
+                    temp_i = stan_i + 1
+                    match_idx = 1
+                    entities = norm_word.split(' ')
+                    while temp_i < stan_len and match_idx < len(entities):
+                        temp_word, temp_pos = stan_pos_tag[temp_i]
+                        if temp_word == entities[match_idx]:
+                            _ = stan_pos_tag.pop(temp_i)
+                            match_idx += 1
+                        else:
+                            break
+                    stan_pos_tag[stan_i] = (norm_word, stan_pos)
+                stan_i += 1
+                norm_i += 1
+
+        post_treatment(stan_pos_tag, normal_pos_tag, multi_word_name_entities)
+
+        return stan_pos_tag
+
+    def name_entity_module(self, word_list: List[str]) -> Tuple[List[str], Set[str]]:
         """
-        perform named entity recognition using StanfordPOSTagger
-        :param pos_tags: pos taggings
-        :return: part-of-speech tags after merging name entities in sentences
+        perform named entity recognition using StanfordNERTagger
+        :param word_list: token list
+        :return: a token list after merging name entities + a set of name entities
         """
         path_to_model = 'stanford/ner/english.all.3class.distsim.crf.ser.gz'
         path_to_jar = 'stanford/ner/stanford-ner.jar'
         ner = StanfordNERTagger(path_to_model, path_to_jar)
         entity_list = ner.tag(word_list)
+        # this multi_word_name_entities is to solve the problem in StanfordPOSTagger.
+        # If I intend to use StanfordPOSTagger, it always pos-tag multi-word entites separately,
+        # such as "John O'Malley" in sample 8 even though I have combined "John" and "O'Malley"
+        # together as "John O'Malley" in this name_entity_module
+        # So I record all name entities and do a post-treatment after I get the result from StanfordPOSTagger
+        # in function part_of_speech_tagging to make sure that name entities are combined.
+        multi_word_name_entities: Set[str] = set()
         # merge words which belong to the same name entity
         def merge(entity_list: List[Tuple[str, str]]) -> None:
             for (index, (word, tag)) in enumerate(entity_list):
-                if tag == 'O':
+                if tag == 'O':  # other tags
                     continue
-                else:
+                else:           # PERSON or LOCATION or ORGANIZATION
                     # hitting a multi-word name entity, start merging
                     name_entity = [word]
                     entity_tag = tag
                     i = index + 1
                     while i < len(entity_list):
                         next_word, next_tag = entity_list[i]
-                        if next_tag == entity_tag:  # check if they belongs to the same tag
+                        if next_tag != entity_tag:
+                            break
+                        else:  # if they belongs to the same tag
                             name_entity.append(next_word)
                             _ = entity_list.pop(i)
-                        else:
-                            break
                     entity_list[index] = (' '.join(name_entity), entity_tag)
+                    if len(name_entity) >= 2:
+                        multi_word_name_entities.add(' '.join(name_entity))
         merge(entity_list)
-        return [entity for (entity, tag) in entity_list]
+        return [entity for (entity, tag) in entity_list], multi_word_name_entities
 
-    def parse_and_validate(self, tokens: List[List[str]], pos_tags: List[List[str]]) -> None:
+    def parse_and_validate(self, token_lists: List[List[str]], pos_tags: List[List[str]]) -> None:
         """
         parse the sentences and print the parse trees
-        :param pos_tags: pos taggings
+        :param token_lists: a list of token lists of sentences
         """
-        for ts in tokens:
+        for ts in token_lists:
             self.parser.parse(ts)
 
     def run_validation(self):
@@ -126,22 +171,26 @@ class Pipeline:
 
             # tokenization + pos tagging
             pos_tags: List[List[str]] = list()
-            tokens: List[List[str]] = list()
+            token_lists: List[List[str]] = list()
+            name_entities: Set[str] = set()
             for sent in sents:
                 # word tokenization
                 words = word_tokenize(sent)
                 # name entity module
-                words = self.name_entity_module(words)
-                tokens.append(words[:-1])   # omit the last period
+                words, name_entity = self.name_entity_module(words)
+                token_lists.append(words[:-1])   # omit the last period
+                name_entities = name_entities.union(name_entity)
                 # part-of-speech tagging
-                pos_tags.append(self.part_of_speech_tagging(words))
+                pos_tags.append(self.part_of_speech_tagging(words, name_entity))
             print('Part-of-speech tagging results:')
             print(pos_tags)
+            print('Name entities:')
+            print(name_entities)
             print('---------------------------------------------')
 
             # run the Earley parser written in context-free grammar to validate data
             print('Parsing results:')
-            self.parse_and_validate(tokens, pos_tags)
+            self.parse_and_validate(token_lists, pos_tags)
             print('---------------------------------------------')
 
         except Exception as ex:
@@ -153,8 +202,8 @@ if __name__ == '__main__':
     grammar_file_url = 'grammar/grammar.fcfg'
     parser = Parser(grammar_file_url)
 
-    # TODO: this is the testing file path, please change the path to the testing file before testing
-    data_file = 'data/sent1.txt'
+    # TODO: this is the file path to read and parse, please change the path to the testing file path
+    data_file = 'data/sent2.txt'
 
     # run pipeline to validate the data
     pipeline = Pipeline(parser, data_file)
