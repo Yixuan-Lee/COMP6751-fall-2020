@@ -203,7 +203,7 @@ if __name__ == '__main__':
     parser = Parser(grammar_file_url)
 
     # TODO: this is the file path to read and parse, please change the path to the testing file path
-    data_file = 'data/sent2.txt'
+    data_file = 'data/sent3.txt'
 
     # run pipeline to validate the data
     pipeline = Pipeline(parser, data_file)
