@@ -18,7 +18,7 @@
 
 3. [Can't make Stanford POS tagger working in nltk](https://stackoverflow.com/questions/34692987/cant-make-stanford-pos-tagger-working-in-nltk)
 
-4. *[nltk.tag package doc](http://www.nltk.org/api/nltk.tag.html?highlight=stanford%20pos%20tagger#nltk.tag.stanford.StanfordTagger)
+4. *[nltk.tag package doc (name entity)](http://www.nltk.org/api/nltk.tag.html?highlight=stanford%20pos%20tagger#nltk.tag.stanford.StanfordTagger)
 
 5. [Download Stanford Log-linear Part-Of-Speech Tagger](https://nlp.stanford.edu/software/tagger.html)
 
@@ -30,5 +30,6 @@
 
 9. *[NLTK book chapter 9](https://www.nltk.org/book/ch09.html)
 
+10. [Python使用nltk进行Chart Parsing](https://lijiancheng0614.github.io/2015/10/25/2015_10_25_Python_nltk/)
 
-
+11. [nltk.chunk package doc (name entity)](https://www.nltk.org/api/nltk.chunk.html)
