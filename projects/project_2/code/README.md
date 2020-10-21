@@ -33,3 +33,7 @@
 10. [Python使用nltk进行Chart Parsing](https://lijiancheng0614.github.io/2015/10/25/2015_10_25_Python_nltk/)
 
 11. [nltk.chunk package doc (name entity)](https://www.nltk.org/api/nltk.chunk.html)
+
+12. [updates on Penn Part of Speech Tagset](https://cs.nyu.edu/grishman/jet/guide/PennPOS.html)
+
+13. [Penn Treebank tagset](https://www.sketchengine.eu/penn-treebank-tagset/)

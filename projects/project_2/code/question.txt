@@ -10,27 +10,44 @@ If  1), I need to write my grammar rules like: S -> S . S
 If  2), I need to call sentence_tokenize, and parse each sentence.
 
 Answer:
+Yes, print and draw the parse tree separately.
 
-
-2. Can I use nltk.tag.stanford.StanfordNERTagger in namedd entity module?
-
-Answer:
-
-
-3. In the report, what modules should I include? Should I write a Demo report
-like Project 1?
-    1)
-
-Answer:
-
-
-4. Example sentence 2, 3, 4, 5, is it correct to generate 2 parse trees since there
+----------------------------------------------------------------------------------
+2. Example sentence 2, 3, 4, 5, is it correct to generate 2 parse trees since there
 are 2 possible explanation due to PP attachment?
 
 Answer:
+Yes, but I need to explain which parse tree is the proper one and which one is the
+improper one in the report.
+
+----------------------------------------------------------------------------------
+3. In the report, what modules should I suppose to write? Should I write a Demo report
+like Project 1?
+
+Answer:
+The report needs to include:
+    1) design decision on feature grammars
+    2) include a Demo report like Project 1
 
 
-5. Do I have to use Date Recognizer in project 1?
+----------------------------------------------------------------------------------
+4. Provide an option to save/print. Does it mean save the parse tree diagram or
+save the tree printed on the console?
+
+Answer:
+provide an option to save the parse tree graphically.
+
+
+----------------------------------------------------------------------------------
+5. Can I use nltk.tag.stanford.StanfordNERTagger in named entity module?
+
+Answer:
+I need to provide the basic name entity tagger (nltk.ne_chunk) and StanfordNERTagger
+if I prefer. And I can compare these two in the report.
+
+
+----------------------------------------------------------------------------------
+6. Do I have to use Date Recognizer in project 1?
 
 Answer:
 
