@@ -37,3 +37,9 @@
 12. [updates on Penn Part of Speech Tagset](https://cs.nyu.edu/grishman/jet/guide/PennPOS.html)
 
 13. [Penn Treebank tagset](https://www.sketchengine.eu/penn-treebank-tagset/)
+
+14. *[NLTK Named Entity recognition to a Python list](https://stackoverflow.com/questions/31836058/nltk-named-entity-recognition-to-a-python-list)
+
+15. *[nltk.ne_chunk doc](https://www.nltk.org/api/nltk.chunk.html)
+
+

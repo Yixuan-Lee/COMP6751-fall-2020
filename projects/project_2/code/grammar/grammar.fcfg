@@ -4,13 +4,12 @@
 # ###################
 
 # S expansion productions
-S -> NP[NUM=?n] VP[NUM=?n]
-S -> DATE COMMA S
-
+S -> NP[NUM=?n] VP[NUM=?n] | PRP VP[NUM=?n]
+S -> DATE COMMA NP[NUM=?n] VP[NUM=?n] | DATE COMMA DATE COMMA NP[NUM=?n] VP[NUM=?n]
 
 ### -------------------------------------------------------- ###
 # NP expansion productions
-NP[NUM=?n] -> DT[NUM=?n] NP[NUM=?n] | DT[NUM=?n] NP[NUM=?n] PP
+NP[NUM=?n] -> DT[NUM=?n] NP[NUM=?n] | DT[NUM=?n] NP[NUM=?n] PP | N[NUM=?n] NP[NUM=?n] PP
 NP[NUM=?n] -> N[NUM=?n] | NNP[NUM=?n] | N[NUM=?n] NP[NUM=?n]
 NP[NUM=?n] -> PRP NP[NUM=?n] | PRP NP[NUM=?n] PP
 
@@ -19,9 +18,9 @@ NP[NUM=?n] -> PRP NP[NUM=?n] | PRP NP[NUM=?n] PP
 ### -------------------------------------------------------- ###
 # VP expansion productions
 VP[TENSE=?t, NUM=?n] -> VP[TENSE=?t, NUM=?n] PP
-VP[TENSE=?t, NUM=?n] -> TV[TENSE=?t, NUM=?n] NP[NUM=?n]
-VP[TENSE=?t, NUM=?n] -> RB TV[TENSE=?t, NUM=?n] NP[NUM=?n]
-
+VP[TENSE=?t, NUM=?n] -> TV[TENSE=?t, NUM=?n] NP[NUM=?n] | RB TV[TENSE=?t, NUM=?n] NP[NUM=?n]
+VP[TENSE=?t, NUM=?n] -> MD TV[TENSE=?t] NP[NUM=?n]
+VP[TENSE=?t, NUM=?n] -> TV[TENSE=?t, NUM=?n] INTRO S
 
 ### -------------------------------------------------------- ###
 # PP expansion productions
@@ -45,7 +44,11 @@ Det[NUM=?n] -> 'the'
 
 ### -------------------------------------------------------- ###
 # Auxiliary verbs
+AUX[TENSE=inf] -> 'be'
 
+### -------------------------------------------------------- ###
+# Modal
+MD -> 'will'
 
 ### -------------------------------------------------------- ###
 # Punctuations
@@ -63,7 +66,7 @@ N[NUM=sg] -> NN
 N[NUM=pl] -> NNS
 
 ## singular nouns
-NN -> 'apple' | 'table' | 'fridge' | 'office' | 'refrigerator'
+NN -> 'apple' | 'table' | 'fridge' | 'office' | 'refrigerator' | 'desk'
 
 ## plural nouns
 
@@ -71,14 +74,14 @@ NN -> 'apple' | 'table' | 'fridge' | 'office' | 'refrigerator'
 
 ### -------------------------------------------------------- ###
 # Possessive pronoun
-PRP -> 'his'
+PRP -> 'his' | 'he' | 'He' | 'it' | 'It'
 
 
 ### -------------------------------------------------------- ###
 # Prepositions
 IN -> P
 ## lower-case
-P -> 'at' | 'in' | 'from' | 'to' | 'on'
+P -> 'at' | 'in' | 'from' | 'to' | 'on' | 'that'
 
 ## upper-case
 P -> 'On'
@@ -89,7 +92,7 @@ P -> 'On'
 
 ### -------------------------------------------------------- ###
 # Adjective
-JJ -> 'Last'
+JJ -> 'Last' | 'crunchy'
 
 ### -------------------------------------------------------- ###
 # Adverb
@@ -101,10 +104,11 @@ RB -> 'finally'
 
 ### -------------------------------------------------------- ###
 # Verbs (intransitive/transitive)
-## present tense
+## present tense (infinitive)
+TV[TENSE=inf] -> 'put' | 'eat'
 
 ## past tense
-TV[TENSE=past] -> 'ate' | 'took'
+TV[TENSE=past] -> 'ate' | 'took' | 'promised'
 
 
 ### -------------------------------------------------------- ###
@@ -139,3 +143,6 @@ DAY -> DIGIT | DIGIT DIGIT
 NN_NUM -> "1st" | "2nd" | "3rd" | "4th" | "5th" | "6th" | "7th" | "8th" | "9th" | "10th" | "11th" | "12th" | "13th" | "14th" | "15th" | "16th" | "17th" | "18th" | "19th" | "20th" | "21st" | "22nd" | "23rd" | "24th" | "25th" | "26th" | "27th" | "28th" | "29th" | "30th" | "31st"
 DIGIT -> "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9"
 
+
+
+INTRO -> 'that'
