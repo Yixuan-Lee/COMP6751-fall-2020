@@ -1,3 +1,9 @@
+"""
+This is the enhanced version which use StanfordPOSTagger and StanfordNERTagger
+for POS Tagging and Name Entity Module. I will compare the result with the
+base version (main_base) in my report.
+"""
+
 import os
 import nltk
 from nltk import sent_tokenize, word_tokenize, load_parser, FeatureEarleyChartParser
@@ -124,7 +130,7 @@ class Pipeline:
         # together as "John O'Malley" in this name_entity_module
         # So I record all name entities and do a post-treatment after I get the result from StanfordPOSTagger
         # in function part_of_speech_tagging to make sure that name entities are combined.
-        multi_word_name_entities: Set[str] = set()
+        name_entities: Set[str] = set()
         # merge words which belong to the same name entity
         def merge(entity_list: List[Tuple[str, str]]) -> None:
             for (index, (word, tag)) in enumerate(entity_list):
@@ -143,10 +149,10 @@ class Pipeline:
                             name_entity.append(next_word)
                             _ = entity_list.pop(i)
                     entity_list[index] = (' '.join(name_entity), entity_tag)
-                    if len(name_entity) >= 2:
-                        multi_word_name_entities.add(' '.join(name_entity))
+                    if len(name_entity) >= 1:
+                        name_entities.add(' '.join(name_entity))
         merge(entity_list)
-        return [entity for (entity, tag) in entity_list], multi_word_name_entities
+        return [entity for (entity, tag) in entity_list], name_entities
 
     def parse_and_validate(self, token_lists: List[List[str]], pos_tags: List[List[str]]) -> None:
         """
@@ -164,7 +170,7 @@ class Pipeline:
             raw = self.reformat_raw()
 
             # sentence splitting
-            sents = nltk.sent_tokenize(raw)
+            sents = sent_tokenize(raw)
             print('Sentences splitting results:')
             print(sents)
             print('---------------------------------------------')
@@ -190,7 +196,7 @@ class Pipeline:
 
             # run the Earley parser written in context-free grammar to validate data
             print('Parsing results:')
-            self.parse_and_validate(token_lists, pos_tags)
+            # self.parse_and_validate(token_lists, pos_tags)
             print('---------------------------------------------')
 
         except Exception as ex:
@@ -203,7 +209,7 @@ if __name__ == '__main__':
     parser = Parser(grammar_file_url)
 
     # TODO: this is the file path to read and parse, please change the path to the testing file path
-    data_file = 'data/sent3.txt'
+    data_file = 'data/sent7.txt'
 
     # run pipeline to validate the data
     pipeline = Pipeline(parser, data_file)
