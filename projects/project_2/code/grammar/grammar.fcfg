@@ -11,7 +11,7 @@ S -> DATE COMMA NP[NUM=?n] VP[NUM=?n] | DATE COMMA DATE COMMA NP[NUM=?n] VP[NUM=
 # NP expansion productions
 NP[NUM=?n] -> DT[NUM=?n] NP[NUM=?n] | DT[NUM=?n] NP[NUM=?n] PP | N[NUM=?n] NP[NUM=?n] PP
 NP[NUM=?n] -> N[NUM=?n] | NNP[NUM=?n] | N[NUM=?n] NP[NUM=?n]
-NP[NUM=?n] -> PRP NP[NUM=?n] | PRP NP[NUM=?n] PP
+NP[NUM=?n] -> PRP NP[NUM=?n] | PRP NP[NUM=?n] PP | PRP DATE PP
 
 
 
@@ -19,8 +19,8 @@ NP[NUM=?n] -> PRP NP[NUM=?n] | PRP NP[NUM=?n] PP
 # VP expansion productions
 VP[TENSE=?t, NUM=?n] -> VP[TENSE=?t, NUM=?n] PP
 VP[TENSE=?t, NUM=?n] -> TV[TENSE=?t, NUM=?n] NP[NUM=?n] | RB TV[TENSE=?t, NUM=?n] NP[NUM=?n]
-VP[TENSE=?t, NUM=?n] -> MD TV[TENSE=?t] NP[NUM=?n]
-VP[TENSE=?t, NUM=?n] -> TV[TENSE=?t, NUM=?n] INTRO S
+VP[TENSE=?t, NUM=?n] -> MD[TENSE=?t] TV[TENSE=?t] NP[NUM=?n] | MD[TENSE=?t] AUX[TENSE=?n] JJ
+VP[TENSE=?t, NUM=?n] -> TV[TENSE=?t, NUM=?n] INTRO S | TV[TENSE=?t, NUM=?n] NP INTRO S
 
 ### -------------------------------------------------------- ###
 # PP expansion productions
@@ -48,7 +48,11 @@ AUX[TENSE=inf] -> 'be'
 
 ### -------------------------------------------------------- ###
 # Modal
-MD -> 'will'
+## present tense (infinitif)
+MD[TENSE=inf] -> 'will'
+
+# past tense
+MD[TENSE=past] -> 'would'
 
 ### -------------------------------------------------------- ###
 # Punctuations
@@ -57,7 +61,7 @@ COMMA -> ','
 ### -------------------------------------------------------- ###
 # Proper nouns
 NNP[NUM=?n] -> PropN[NUM=?n]
-PropN[NUM=sg] -> 'John'
+PropN[NUM=sg] -> 'John' | 'Mary' | "John O'Malley"
 
 
 ### -------------------------------------------------------- ###
@@ -66,7 +70,7 @@ N[NUM=sg] -> NN
 N[NUM=pl] -> NNS
 
 ## singular nouns
-NN -> 'apple' | 'table' | 'fridge' | 'office' | 'refrigerator' | 'desk'
+NN -> 'apple' | 'table' | 'fridge' | 'office' | 'refrigerator' | 'desk' | 'colleague' | 'replacement'
 
 ## plural nouns
 
@@ -126,6 +130,10 @@ DATE -> IN WEEK | JJ WEEK | IN YEAR SEP MONTH_NUM SEP DAY | YEAR SEP MONTH_NUM S
 ## Separator
 SEP -> "/" | "-" | ","
 
+## Number
+NN_NUM -> "1st" | "2nd" | "3rd" | "4th" | "5th" | "6th" | "7th" | "8th" | "9th" | "10th" | "11th" | "12th" | "13th" | "14th" | "15th" | "16th" | "17th" | "18th" | "19th" | "20th" | "21st" | "22nd" | "23rd" | "24th" | "25th" | "26th" | "27th" | "28th" | "29th" | "30th" | "31st"
+DIGIT -> "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9"
+
 ## Year
 YEAR -> DIGIT DIGIT DIGIT DIGIT
 
@@ -139,10 +147,6 @@ MONTH_NUM -> DIGIT | DIGIT DIGIT
 ## Day
 DAY -> DIGIT | DIGIT DIGIT
 
-## Number
-NN_NUM -> "1st" | "2nd" | "3rd" | "4th" | "5th" | "6th" | "7th" | "8th" | "9th" | "10th" | "11th" | "12th" | "13th" | "14th" | "15th" | "16th" | "17th" | "18th" | "19th" | "20th" | "21st" | "22nd" | "23rd" | "24th" | "25th" | "26th" | "27th" | "28th" | "29th" | "30th" | "31st"
-DIGIT -> "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9"
-
-
-
+### -------------------------------------------------------- ###
+# sub-clause introducer
 INTRO -> 'that'
