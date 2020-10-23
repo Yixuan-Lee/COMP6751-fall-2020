@@ -30,7 +30,7 @@ class Parser:
         trees = 0
         for tree in self.cp.parse(tokens):
             print(tree)     # print the tree
-            tree.draw()     # display the tree diagram
+            # tree.draw()     # display the tree diagram
             trees += 1
         print('trees =', trees)
 
