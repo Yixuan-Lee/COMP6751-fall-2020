@@ -4,10 +4,12 @@
 # ###################
 
 # S expansion productions
-S -> NP[NUM=?n] VP[NUM=?n] | PRP VP[NUM=?n]
-S -> DATE COMMA NP[NUM=?n] TV[NUM=?n] IN S | DATE COMMA DATE COMMA NP[NUM=?n] TV[NUM=?n] NP[NUM=?n] IN S
+S -> NP[NUM=?n] VP[NUM=?n] | CC NP[NUM=?n] VP[NUM=?n]
+S -> DATE COMMA NP[NUM=?n] VP[NUM=?n] | DATE COMMA DATE COMMA NP[NUM=?n] VP[NUM=?n]
+S -> DATE COMMA NP[NUM=?n] TV[NUM=?n] IN S
+S -> DATE COMMA DATE COMMA NP[NUM=?n] TV[NUM=?n] NP[NUM=?n] IN S
 S -> NP[NUM=?n] VP[NUM=?n] CC TV[NUM=?n] IN S
-S -> CC NP[NUM=?n] VP[NUM=?n]
+S -> NP[NUM=?n] TV[NUM=?n] IN S | NP[NUM=?n] TV[NUM=?n] IN S CC IN S
 
 ### -------------------------------------------------------- ###
 # NP expansion productions
@@ -38,6 +40,7 @@ DT[NUM=?n] -> Det[NUM=?n]
 Det[NUM=sg] -> 'an' | 'a'
 
 ## plural determiners
+Det[NUM=pl] -> 'these' | 'some' | 'all'
 
 ## all-purpose determiners
 Det[NUM=?n] -> 'the'
@@ -66,8 +69,7 @@ COMMA -> ','
 ### -------------------------------------------------------- ###
 # Proper nouns
 NNP[NUM=?n] -> PropN[NUM=?n]
-PropN[NUM=sg] -> 'John' | 'Mary' | "John O'Malley" | "O'Malley"
-
+PropN[NUM=sg] -> 'John' | 'Mary' | "John O'Malley" | "O'Malley" | 'Sue'
 
 ### -------------------------------------------------------- ###
 # Nouns
@@ -79,7 +81,7 @@ NN -> 'apple' | 'table' | 'fridge' | 'office' | 'refrigerator' | 'desk' | 'colle
 
 ## plural nouns
 
-## all-purpose nouns
+## non-countable nouns
 
 ### -------------------------------------------------------- ###
 # Possessive pronoun
@@ -121,7 +123,7 @@ TV[TENSE=inf] -> 'put' | 'eat' | 'share' | 'delight'
 
 ## past tense
 ### transitive verbs
-TV[TENSE=past] -> 'ate' | 'took' | 'promised' | 'anticipated'
+TV[TENSE=past] -> 'ate' | 'took' | 'promised' | 'anticipated' | 'said'
 ### intransitive verbs
 IV[TENSE=past] -> 'intended'
 
