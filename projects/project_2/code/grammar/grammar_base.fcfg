@@ -6,6 +6,7 @@
 # S expansion productions
 S -> NP[NUM=?n] VP[NUM=?n] | PRP VP[NUM=?n]
 S -> DATE COMMA NP[NUM=?n] VP[NUM=?n] | DATE COMMA DATE COMMA NP[NUM=?n] VP[NUM=?n]
+S -> DATE COMMA NP[NUM=?n] TV[NUM=?n] IN S
 
 ### -------------------------------------------------------- ###
 # NP expansion productions
@@ -20,12 +21,10 @@ NP[NUM=?n] -> PRP NP[NUM=?n] | PRP NP[NUM=?n] PP | PRP DATE PP
 VP[TENSE=?t, NUM=?n] -> VP[TENSE=?t, NUM=?n] PP
 VP[TENSE=?t, NUM=?n] -> TV[TENSE=?t, NUM=?n] NP[NUM=?n] | RB TV[TENSE=?t, NUM=?n] NP[NUM=?n]
 VP[TENSE=?t, NUM=?n] -> MD[TENSE=?t] TV[TENSE=inf] NP[NUM=?n] | MD[TENSE=?t] AUX[TENSE=inf] JJ
-VP[TENSE=?t, NUM=?n] -> TV[TENSE=?t, NUM=?n] INTRO S | TV[TENSE=?t, NUM=?n] NP INTRO S
 
 ### -------------------------------------------------------- ###
 # PP expansion productions
 PP -> IN NP | IN NP PP
-
 
 # ###################
 # Lexical Productions
@@ -61,7 +60,7 @@ COMMA -> ','
 ### -------------------------------------------------------- ###
 # Proper nouns
 NNP[NUM=?n] -> PropN[NUM=?n]
-PropN[NUM=sg] -> 'John' | 'Mary' | "John O'Malley"
+PropN[NUM=sg] -> 'John' | 'Mary' | "John O'Malley" | "O'Malley"
 
 
 ### -------------------------------------------------------- ###
@@ -78,14 +77,14 @@ NN -> 'apple' | 'table' | 'fridge' | 'office' | 'refrigerator' | 'desk' | 'colle
 
 ### -------------------------------------------------------- ###
 # Possessive pronoun
-PRP -> 'his' | 'he' | 'He' | 'it' | 'It'
+PRP -> 'his' | 'he' | 'He' | 'it' | 'It' | 'her'
 
 
 ### -------------------------------------------------------- ###
 # Prepositions
 IN -> P
 ## lower-case
-P -> 'at' | 'in' | 'from' | 'to' | 'on' | 'that'
+P -> 'at' | 'in' | 'from' | 'to' | 'on' | 'that' | 'with'
 
 ## upper-case
 P -> 'On'
@@ -109,11 +108,13 @@ RB -> 'finally'
 ### -------------------------------------------------------- ###
 # Verbs (intransitive/transitive)
 ## present tense (infinitive)
-TV[TENSE=inf] -> 'put' | 'eat'
+TV[TENSE=inf] -> 'put' | 'eat' | 'share'
 
 ## past tense
+### transitive verbs
 TV[TENSE=past] -> 'ate' | 'took' | 'promised'
-
+### intransitive verbs
+IV[TENSE=past] -> 'intended'
 
 ### -------------------------------------------------------- ###
 # Wh-determiner
