@@ -5,22 +5,24 @@
 
 # S expansion productions
 S -> NP[NUM=?n] VP[NUM=?n] | PRP VP[NUM=?n]
-S -> DATE COMMA NP[NUM=?n] VP[NUM=?n] | DATE COMMA DATE COMMA NP[NUM=?n] VP[NUM=?n]
-S -> DATE COMMA NP[NUM=?n] TV[NUM=?n] IN S
+S -> DATE COMMA NP[NUM=?n] TV[NUM=?n] IN S | DATE COMMA DATE COMMA NP[NUM=?n] TV[NUM=?n] NP[NUM=?n] IN S
+S -> NP[NUM=?n] VP[NUM=?n] CC TV[NUM=?n] IN S
+S -> CC NP[NUM=?n] VP[NUM=?n]
 
 ### -------------------------------------------------------- ###
 # NP expansion productions
 NP[NUM=?n] -> DT[NUM=?n] NP[NUM=?n] | DT[NUM=?n] NP[NUM=?n] PP | N[NUM=?n] NP[NUM=?n] PP
-NP[NUM=?n] -> N[NUM=?n] | NNP[NUM=?n] | N[NUM=?n] NP[NUM=?n]
+NP[NUM=?n] -> N[NUM=?n] | NNP[NUM=?n] | PRP | N[NUM=?n] NP[NUM=?n]
 NP[NUM=?n] -> PRP NP[NUM=?n] | PRP NP[NUM=?n] PP | PRP DATE PP
-
+NP[NUM=?n] -> DT[NUM=?n] JJ NP[NUM=?n]
 
 
 ### -------------------------------------------------------- ###
 # VP expansion productions
 VP[TENSE=?t, NUM=?n] -> VP[TENSE=?t, NUM=?n] PP
-VP[TENSE=?t, NUM=?n] -> TV[TENSE=?t, NUM=?n] NP[NUM=?n] | RB TV[TENSE=?t, NUM=?n] NP[NUM=?n]
-VP[TENSE=?t, NUM=?n] -> MD[TENSE=?t] TV[TENSE=inf] NP[NUM=?n] | MD[TENSE=?t] AUX[TENSE=inf] JJ
+VP[TENSE=?t, NUM=?n] -> TV[TENSE=?t, NUM=?n] NP[NUM=?n] | RB TV[TENSE=?t, NUM=?n] NP[NUM=?n] | MD[TENSE=?t] TV[TENSE=inf] NP[NUM=?n] RB
+VP[TENSE=?t, NUM=?n] -> MD[TENSE=?t] TV[TENSE=inf] NP[NUM=?n] | MD[TENSE=?t] AUX[TENSE=inf] JJ | AUX[TENSE=?t] JJ
+VP[TENSE=?t, NUM=?n] -> IV[TENSE=?t] TO VP[TENSE=inf, NUM=?n]
 
 ### -------------------------------------------------------- ###
 # PP expansion productions
@@ -43,11 +45,15 @@ Det[NUM=?n] -> 'the'
 
 ### -------------------------------------------------------- ###
 # Auxiliary verbs
+## present tense (infinitive)
 AUX[TENSE=inf] -> 'be'
+
+## past tenst
+AUX[TENSE=past] -> 'was'
 
 ### -------------------------------------------------------- ###
 # Modal
-## present tense (infinitif)
+## present tense (infinitive)
 MD[TENSE=inf] -> 'will'
 
 # past tense
@@ -69,7 +75,7 @@ N[NUM=sg] -> NN
 N[NUM=pl] -> NNS
 
 ## singular nouns
-NN -> 'apple' | 'table' | 'fridge' | 'office' | 'refrigerator' | 'desk' | 'colleague' | 'replacement'
+NN -> 'apple' | 'table' | 'fridge' | 'office' | 'refrigerator' | 'desk' | 'colleague' | 'replacement' | 'treat' | 'day'
 
 ## plural nouns
 
@@ -77,7 +83,7 @@ NN -> 'apple' | 'table' | 'fridge' | 'office' | 'refrigerator' | 'desk' | 'colle
 
 ### -------------------------------------------------------- ###
 # Possessive pronoun
-PRP -> 'his' | 'he' | 'He' | 'it' | 'It' | 'her'
+PRP -> 'his' | 'he' | 'He' | 'it' | 'It' | 'her' | 'them' | 'she'
 
 
 ### -------------------------------------------------------- ###
@@ -89,17 +95,20 @@ P -> 'at' | 'in' | 'from' | 'to' | 'on' | 'that' | 'with'
 ## upper-case
 P -> 'On'
 
+## to
+TO -> 'to'
+
 ### -------------------------------------------------------- ###
 # Coordinating Conjunction
-CC -> 'and'
+CC -> 'and' | 'but' | 'But'
 
 ### -------------------------------------------------------- ###
 # Adjective
-JJ -> 'Last' | 'crunchy'
+JJ -> 'Last' | 'crunchy' | 'sick'
 
 ### -------------------------------------------------------- ###
 # Adverb
-RB -> 'finally'
+RB -> 'finally' | 'both'
 
 ### -------------------------------------------------------- ###
 # Number
@@ -108,11 +117,11 @@ RB -> 'finally'
 ### -------------------------------------------------------- ###
 # Verbs (intransitive/transitive)
 ## present tense (infinitive)
-TV[TENSE=inf] -> 'put' | 'eat' | 'share'
+TV[TENSE=inf] -> 'put' | 'eat' | 'share' | 'delight'
 
 ## past tense
 ### transitive verbs
-TV[TENSE=past] -> 'ate' | 'took' | 'promised'
+TV[TENSE=past] -> 'ate' | 'took' | 'promised' | 'anticipated'
 ### intransitive verbs
 IV[TENSE=past] -> 'intended'
 
