@@ -24,10 +24,12 @@ class Parser:
         parse sentences in sent and print the parse tree
         :param sentences: sentences
         """
+        trees = 0
         for tree in self.cp.parse(tokens):
             print(tree)     # print the tree
             tree.draw()     # display the tree diagram
-
+            trees += 1
+        print('trees =', trees)
 
 class Pipeline:
     def __init__(self, parser: Parser, sent_url: str):
@@ -196,7 +198,7 @@ class Pipeline:
 
             # run the Earley parser written in context-free grammar to validate data
             print('Parsing results:')
-            # self.parse_and_validate(token_lists, pos_tags)
+            self.parse_and_validate(token_lists, pos_tags)
             print('---------------------------------------------')
 
         except Exception as ex:
@@ -205,7 +207,7 @@ class Pipeline:
 
 if __name__ == '__main__':
     # define an Earley parser and load the grammar rules
-    grammar_file_url = 'grammar/grammar.fcfg'
+    grammar_file_url = 'grammar/grammar_1_8p1.fcfg'
     parser = Parser(grammar_file_url)
 
     # TODO: this is the file path to read and parse, please change the path to the testing file path

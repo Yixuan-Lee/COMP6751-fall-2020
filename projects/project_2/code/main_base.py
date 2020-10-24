@@ -151,12 +151,12 @@ class Pipeline:
 
 if __name__ == '__main__':
     # define an Earley parser and load the grammar rules
-    grammar_file_url = 'grammar/grammar.fcfg'
+    grammar_file_url = 'grammar/grammar_base.fcfg'
     parser = Parser(grammar_file_url)
 
     # TODO: this is the file path to read and parse, please change the path to the testing file path
     # data_file = 'data/sent7.txt'
-    data_file = 'data/test_4.txt'
+    data_file = 'data/sent9.txt'
 
     # run pipeline to validate the data
     pipeline = Pipeline(parser, data_file)
