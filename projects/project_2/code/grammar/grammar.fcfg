@@ -6,10 +6,10 @@
 # S expansion productions
 S -> NP[NUM=?n] VP[NUM=?n] | CC NP[NUM=?n] VP[NUM=?n]
 S -> DATE COMMA NP[NUM=?n] VP[NUM=?n] | DATE COMMA DATE COMMA NP[NUM=?n] VP[NUM=?n]
-S -> DATE COMMA NP[NUM=?n] TV[NUM=?n] IN S
-S -> DATE COMMA DATE COMMA NP[NUM=?n] TV[NUM=?n] NP[NUM=?n] IN S
-S -> NP[NUM=?n] VP[NUM=?n] CC TV[NUM=?n] IN S
-S -> NP[NUM=?n] TV[NUM=?n] IN S | NP[NUM=?n] TV[NUM=?n] IN S CC IN S
+S -> DATE COMMA NP[NUM=?n] TV[NUM=?n] INTRO S
+S -> DATE COMMA DATE COMMA NP[NUM=?n] TV[NUM=?n] NP[NUM=?n] INTRO S
+S -> NP[NUM=?n] VP[NUM=?n] CC TV[NUM=?n] INTRO S
+S -> NP[NUM=?n] TV[NUM=?n] INTRO S | NP[NUM=?n] TV[NUM=?n] INTRO S CC IN S
 
 ### -------------------------------------------------------- ###
 # NP expansion productions
@@ -77,7 +77,7 @@ N[NUM=sg] -> NN
 N[NUM=pl] -> NNS
 
 ## singular nouns
-NN -> 'apple' | 'table' | 'fridge' | 'office' | 'refrigerator' | 'desk' | 'colleague' | 'replacement' | 'treat' | 'day'
+NN -> 'apple' | 'table' | 'fridge' | 'office' | 'refrigerator' | 'desk' | 'colleague' | 'replacement' | 're-placement' | 'treat' | 'day'
 
 ## plural nouns
 
