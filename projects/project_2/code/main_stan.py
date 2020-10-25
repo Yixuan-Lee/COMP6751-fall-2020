@@ -8,28 +8,34 @@ import os
 import nltk
 from nltk import sent_tokenize, word_tokenize, load_parser, FeatureEarleyChartParser
 from nltk.tag.stanford import StanfordNERTagger, StanfordPOSTagger
+from nltk.draw.tree import TreeView
 from typing import List, Tuple, Set
 
 
 class Parser:
-    def __init__(self, grammar_url: str):
+    def __init__(self, grammar_url: str, pprint: bool=False, save: bool=False):
         """
         constructor
         :param grammar_url: grammar file URL
         """
         self.cp = load_parser(grammar_url, trace=0, parser=FeatureEarleyChartParser)
+        self.print = pprint
+        self.save = save
+        self.tree_no = 1
 
     def parse(self, tokens: List[str]) -> None:
         """
         parse sentences in sent and print the parse tree
         :param sentences: sentences
         """
-        trees = 0
         for tree in self.cp.parse(tokens):
             print(tree)     # print the tree
-            tree.draw()     # display the tree diagram
-            trees += 1
-        print('trees =', trees)
+            if self.print:
+                tree.draw()     # display the tree diagram
+            if self.save:
+                TreeView(tree)._cframe.print_to_file('results/output' + str(self.tree_no) + '.ps')
+            self.tree_no += 1
+
 
 class Pipeline:
     def __init__(self, parser: Parser, sent_url: str):
@@ -199,7 +205,6 @@ class Pipeline:
             # run the Earley parser written in context-free grammar to validate data
             print('Parsing results:')
             self.parse_and_validate(token_lists, pos_tags)
-            print('---------------------------------------------')
 
         except Exception as ex:
             print(ex.args[0])
@@ -207,11 +212,19 @@ class Pipeline:
 
 if __name__ == '__main__':
     # define an Earley parser and load the grammar rules
-    grammar_file_url = 'grammar/grammar_1_8p1.fcfg'
-    parser = Parser(grammar_file_url)
+    input_pprint = input('Do you want to print the parse trees on the console? (Y/N) ')
+    input_save = input('Do you want to save the parse tree diagrams in the directory ./result/? (Y/N) ')
+    pprint = False
+    save = False
+    if input_pprint == 'Y' or input_pprint.lower() == 'Yes':
+        pprint = True
+    if input_save == 'Y' or input_save.lower() == 'Yes':
+        save = True
+    grammar_file_url = 'grammar/grammar.fcfg'
+    parser = Parser(grammar_file_url, pprint, save)
 
     # TODO: this is the file path to read and parse, please change the path to the testing file path
-    data_file = 'data/sent7.txt'
+    data_file = 'data/sent9.txt'
 
     # run pipeline to validate the data
     pipeline = Pipeline(parser, data_file)
