@@ -31,12 +31,23 @@ class Parser:
         parse sentences in sent and print the parse tree
         :param sentences: sentences
         """
+        if self.save:
+            # delete all files in /results/.. directory
+            dir = 'results/'
+            filelist = [f for f in os.listdir(dir)]
+            for f in filelist:
+                os.remove(os.path.join(dir, f))
+
         for tree in self.cp.parse(tokens):
             print(tree)     # print the tree
             if self.print:
                 tree.draw()     # display the tree diagram
             if self.save:
-                TreeView(tree)._cframe.print_to_file('results/output' + str(self.tree_no) + '.ps')
+                # save the tree diagram
+                TreeView(tree)._cframe.print_to_file('results/Tree' + str(self.tree_no) + '_diagram' + '.ps')
+                # save the tree text
+                with open('results/Tree' + str(self.tree_no) + '_text' + '.txt', "w", encoding='utf-8') as writer:
+                    writer.write(str(tree))
             self.tree_no += 1
 
 
@@ -155,19 +166,19 @@ class Pipeline:
 
 if __name__ == '__main__':
     # define an Earley parser and load the grammar rules
-    input_pprint = input('Do you want to print the parse trees on the console? (Y/N) ')
-    input_save = input('Do you want to save the parse tree diagrams in the directory ./result/? (Y/N) ')
+    input_pprint = input('Do you want to print the parse tree diagrams on the console? (Y/N) ')
+    input_save = input('Do you want to save the parse tree in the directory result/? (Y/N) ')
     pprint = False
     save = False
-    if input_pprint == 'Y' or input_pprint.lower() == 'Yes':
+    if input_pprint.upper() == 'Y' or input_pprint.lower() == 'yes':
         pprint = True
-    if input_save == 'Y' or input_save.lower() == 'Yes':
+    if input_save.upper() == 'Y' or input_save.lower() == 'yes':
         save = True
     grammar_file_url = 'grammar/grammar.fcfg'
     parser = Parser(grammar_file_url, pprint, save)
 
     # TODO: this is the file path to read and parse, please change the path to the testing file path
-    data_file = 'data/sent9.txt'
+    data_file = 'data/sent6.txt'
 
     # run pipeline to validate the data
     pipeline = Pipeline(parser, data_file)
