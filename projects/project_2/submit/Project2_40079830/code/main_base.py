@@ -10,9 +10,9 @@ from nltk import sent_tokenize, word_tokenize, load_parser, FeatureEarleyChartPa
 from typing import List, Tuple, Set
 from nltk.draw.tree import TreeView
 
-# TODO: uncomment the two lines before submission
-# nltk.download('maxent_ne_chunker')
-# nltk.download('words')
+# TODO: download the necessary modules
+nltk.download('maxent_ne_chunker')
+nltk.download('words')
 
 
 class Parser:
@@ -31,13 +31,6 @@ class Parser:
         parse sentences in sent and print the parse tree
         :param sentences: sentences
         """
-        if self.save:
-            # delete all files in /results/.. directory
-            dir = 'results/'
-            filelist = [f for f in os.listdir(dir)]
-            for f in filelist:
-                os.remove(os.path.join(dir, f))
-
         for tree in self.cp.parse(tokens):
             print(tree)     # print the tree
             if self.print:
@@ -49,6 +42,14 @@ class Parser:
                 with open('results/Tree' + str(self.tree_no) + '_text' + '.txt', "w", encoding='utf-8') as writer:
                     writer.write(str(tree))
             self.tree_no += 1
+
+    def clear_directory(self):
+        if self.save:
+            # delete all files in /results/.. directory
+            dir = 'results/'
+            filelist = [f for f in os.listdir(dir)]
+            for f in filelist:
+                os.remove(os.path.join(dir, f))
 
 
 class Pipeline:
@@ -121,6 +122,7 @@ class Pipeline:
         parse the sentences and print the parse trees
         :param token_lists: a list of token lists of sentences
         """
+        self.parser.clear_directory()
         for ts in token_lists:
             self.parser.parse(ts)
 
@@ -178,7 +180,25 @@ if __name__ == '__main__':
     parser = Parser(grammar_file_url, pprint, save)
 
     # TODO: this is the file path to read and parse, please change the path to the testing file path
-    data_file = 'data/sent6.txt'
+    # TODO: it is possible to add a new file under the directory "data/" and rename data_file to the new file
+    data_file = 'data/sent1.txt'
+    # data_file = 'data/sent2.txt'
+    # data_file = 'data/sent3.txt'
+    # data_file = 'data/sent4.txt'
+    # data_file = 'data/sent5.txt'
+    # data_file = 'data/sent6.txt'
+    # data_file = 'data/sent7.txt'
+    # data_file = 'data/sent8.txt'
+    # data_file = 'data/sent9.txt'
+    # data_file = 'data/challenge1.txt'
+    # data_file = 'data/challenge2.txt'
+    # data_file = 'data/challenge3.txt'
+    # data_file = 'data/challenge4.txt'
+    # data_file = 'data/challenge5.txt'
+    # data_file = 'data/challenge6.txt'
+    # data_file = 'data/limitation.txt'
+    # data_file = 'data/compare1.txt'
+    # data_file = 'data/compare2.txt'
 
     # run pipeline to validate the data
     pipeline = Pipeline(parser, data_file)
