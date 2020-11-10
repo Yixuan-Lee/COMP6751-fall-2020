@@ -54,6 +54,7 @@ class SentimentPipeline:
             for pos_sent in self.lexica.get_positive_sents():
                 words = word_tokenize(pos_sent)
                 pos = self.part_of_speech_tagging(words)
+                print('part-of-speech:', pos)
                 senti = self.parse_and_sentify(words)
                 # write the sentencee and the ground-truth and the prediction to a result file
                 self.output_results(pos_sent, 'positive', senti)
@@ -61,6 +62,7 @@ class SentimentPipeline:
             for neg_sent in self.lexica.get_negative_sents():
                 words = word_tokenize(neg_sent)
                 pos = self.part_of_speech_tagging(words)
+                print('part-of-speech:', pos)
                 senti = self.parse_and_sentify(words)
                 # write the ground-truth and prediction to a result file
                 self.output_results(neg_sent, 'negative', senti)

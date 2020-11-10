@@ -13,5 +13,5 @@ if __name__ == '__main__':
     # define and run pipeline
     sp = SentimentPipeline(parser, data)
     sp.print_lexica()
-    # sp.run_pipeline()
+    sp.run_pipeline()
 
