@@ -1,3 +1,4 @@
+import os
 from nltk.corpus import opinion_lexicon
 from nltk.corpus import sentence_polarity
 from typing import List
@@ -13,27 +14,49 @@ class DataLoader:
         """
         constructor
         """
-        # negative words
-        self.negative_lexica = opinion_lexicon.negative()
-        self.negative_lexica_size = len(self.negative_lexica)
-        # positive words
-        self.positive_lexica = opinion_lexicon.positive()
-        self.positive_lexica_size = len(self.positive_lexica)
+        self.positive_sentences = []
+        self.negative_sentences = []
 
-        # sentence sentiment categories
-        self.senti_categories = sentence_polarity.categories()
-        # negative sentiment sentences
-        self.negative_sentences = sentence_polarity.sents(categories=['neg'])
-        self.negative_sentences_size = len(self.negative_sentences)
-        # positive sentiment sentences
-        self.positive_sentences = sentence_polarity.sents(categories=['pos'])
-        self.positive_sentences_size = len(self.positive_sentences)
+        response1 = input('Would you want to test sentiment with a local text data? (Y/N) ')
+        if response1.lower() == 'y' or response1.lower() == 'yes':
+            positive_file = input('Input the path for the positive sentiment data: ')
+            negative_file = input('Input the path for the negative sentiment data: ')
+            if os.path.exists(positive_file):
+                # read positive sentences
+                with open(positive_file, "r") as reader:
+                    self.positive_sentences = reader.readlines()
+                self.positive_sentences = [sent.rstrip() for sent in self.positive_sentences]
+            if os.path.exists(negative_file):
+                # read negative sentences
+                with open(negative_file, "r") as reader:
+                    self.negative_sentences = reader.readlines()
+                self.negative_sentences = [sent.rstrip() for sent in self.negative_sentences]
+        else:
+            response2 = input('Would you want to test sentiment with data in sentence_polarity? (Y/N) ')
+            if response2.lower() == 'y' or response2.lower() == 'yes':
+                # negative words
+                self.negative_lexica = opinion_lexicon.negative()
+                self.negative_lexica_size = len(self.negative_lexica)
+                # positive words
+                self.positive_lexica = opinion_lexicon.positive()
+                self.positive_lexica_size = len(self.positive_lexica)
+
+                # sentence sentiment categories
+                self.senti_categories = sentence_polarity.categories()
+                # negative sentiment sentences
+                self.negative_sentences = sentence_polarity.sents(categories=['neg'])[:10]  # get the first 10 sentences
+                self.negative_sentences = [' '.join(sent) for sent in self.negative_sentences]
+                self.negative_sentences_size = len(self.negative_sentences)
+                # positive sentiment sentences
+                self.positive_sentences = sentence_polarity.sents(categories=['pos'])[:10]  # get the first 10 sentences
+                self.positive_sentences = [' '.join(sent) for sent in self.positive_sentences]
+                self.positive_sentences_size = len(self.positive_sentences)
 
     def get_negative_sents(self) -> List[str]:
-        return [' '.join(sent) for sent in self.negative_sentences]
+        return self.negative_sentences
 
     def get_positive_sents(self) -> List[str]:
-        return [' '.join(sent) for sent in self.positive_sentences]
+        return self.positive_sentences
 
 
 ## for testing DataLoader

@@ -15,6 +15,10 @@ class SentimentPipeline:
         """
         self.parser = parser
         self.lexica = lexica
+        self.true_positive = 0
+        self.true_negative = 0
+        self.false_positive = 0
+        self.false_negative = 0
 
     def part_of_speech_tagging(self, words: List[str]) -> List[Tuple[str, str]]:
         """
@@ -33,9 +37,12 @@ class SentimentPipeline:
         self.parser.clear_directory()
         # retrieve sentiment labels of all possible parse trees
         sentiments = self.parser.parse(token_list)
-        count = Counter(sentiments)
-        # return the most probable sentiment
-        return count.most_common()[0][0]
+        if len(sentiments) == 0:
+            # meaning the parser doesn't have the corresponding gramar for the sentence
+            return 'unknown'
+        else:
+            # return the most probable sentiment
+            return Counter(sentiments).most_common()[0][0]
 
     def run_pipeline(self) -> None:
         """
@@ -77,8 +84,37 @@ class SentimentPipeline:
             with open("Good.txt", "a+") as writer:
                 writer.write(sentence)
                 writer.write(ground_truth + '\t' + label)
+            if ground_truth == 'negative':
+                self.true_negative += 1
+            elif ground_truth == 'positive':
+                self.true_positive += 1
         else:
             # write the sentence and the ground_truth and label to False.txt
             with open("False.txt", "a+") as writer:
                 writer.write(sentence)
                 writer.write(ground_truth + '\t' + label)
+            if label == 'negative':
+                self.false_negative += 1
+            elif label == 'positive':
+                self.false_positive += 1
+
+    def performance(self) -> None:
+        recall = self.true_positive / (self.true_positive + self.false_negative)
+        precision = self.true_positive / (self.true_positive + self.false_positive)
+        f1_score = (precision * recall) / (precision + recall)
+        print('True Negative =', self.true_negative)
+        print('True Positive =', self.true_positive)
+        print('False Negative =', self.false_negative)
+        print('False Positive =', self.false_negative)
+        print('Precision =', precision)
+        print('Recall =', recall)
+        print('F1 measure =', f1_score)
+
+    def print_lexica(self):
+        print('positive sentences:')
+        for sent in self.lexica.get_positive_sents():
+            print(sent)
+        print()
+        print('negative sentences:')
+        for sent in self.lexica.get_negative_sents():
+            print(sent)
