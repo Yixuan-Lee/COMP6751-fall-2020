@@ -15,4 +15,9 @@
 
 5. [nltk.grammar class](https://www.nltk.org/_modules/nltk/grammar.html)
 
-6. 
+6. *[Wikipedia: Adverbial phrase (ADVP)](https://en.wikipedia.org/wiki/Adverbial_phrase)
+
+7. *[Wikipedia: Adjective phrase (ADJP)](http://www.languagetools.info/grammarpedia/adjectivephrase.htm)
+
+
+
