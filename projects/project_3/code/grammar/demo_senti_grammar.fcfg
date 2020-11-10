@@ -1,0 +1,16 @@
+% start S
+# ###################
+# Grammar Productions
+# ###################
+
+# S expansion productions
+S[senti=?s, TENSE=?t] -> NP[NUM=?n] VP[NUM=?n, TENSE=?t, senti=?s] | NP[NUM=?n] COMMA VP[NUM=?n]
+
+VP[NUM=?n, TENSE=?t, senti=?s] -> AUX[TENSE=?t] JJ[senti=?s]
+
+NP[NUM=?n] -> 'He'
+AUX[TENSE=pres, NUM=sg] -> 'is'
+JJ[senti=neg] ->'horrible'
+
+
+

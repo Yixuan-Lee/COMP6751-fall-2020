@@ -1,0 +1,8 @@
+% start S
+# ###################
+# Grammar Productions
+# ###################
+
+# S expansion productions
+S[sent=?s, TENSE=?t] -> NP[NUM=?n] VP[NUM=?n, TENSE=?t, sent=?s] | NP[NUM=?n] COMMA VP[NUM=?n]
+
