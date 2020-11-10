@@ -4,5 +4,46 @@
 # ###################
 
 # S expansion productions
-S[sent=?s, TENSE=?t] -> NP[NUM=?n] VP[NUM=?n, TENSE=?t, sent=?s] | NP[NUM=?n] COMMA VP[NUM=?n]
+S[senti=?s, TENSE=?t] -> NP[NUM=?n] VP[NUM=?n, TENSE=?t, senti=?s] | NP[NUM=?n] COMMA VP[NUM=?n]
+
+
+
+### -------------------------------------------------------- ###
+# SBAR (subordinary clause) expansion productions
+
+
+
+### -------------------------------------------------------- ###
+# NP (noun phrase) expansion productions
+
+
+
+### -------------------------------------------------------- ###
+# VP (verb phrase) expansion productions
+
+
+
+### -------------------------------------------------------- ###
+# PP (prepositional phrase) expansion productions
+
+
+
+### -------------------------------------------------------- ###
+# ADJP (adjective phrase) expansion productions
+
+
+
+### -------------------------------------------------------- ###
+# ADVP (adverbial phrase) expansion productions
+
+
+
+# ###################
+# Lexical Productions
+# ###################
+
+
+
+
+
 
