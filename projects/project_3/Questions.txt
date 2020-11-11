@@ -1,0 +1,34 @@
+                       Remaining Questions (project 3)
+=============================================================================
+
+1. What is the input and expected output for this project?
+
+Input:
+
+Output:
+
+-----------------------------------------------------------------------------
+2. In the output, do we only need to print the original testing sentences and the sentiment labels for the output?
+
+(Present my current output)
+
+-----------------------------------------------------------------------------
+3. How robust the feature-based grammar should be? and the lexicon should cover?
+
+
+-----------------------------------------------------------------------------
+4. Some of the sentence examples are not complete sentences, and also incomplete sentences in rt-polarity.neg and rt-polarity.pos, why?
+
+
+-----------------------------------------------------------------------------
+5. If there are multiple possible parse trees for the same sentence, and some parse trees with 'positive' label and some with 'negative'
+label and some with 'neutral' label, I just let the parse trees vote for the sentiment and label the sentence as the sentiment with
+the most votes, is it valid?
+
+
+-----------------------------------------------------------------------------
+6. In report, what we need to discuss? Do you have to limit the page sizes for each section?
+And should we include a Demo report as the previous projects?
+
+
+
