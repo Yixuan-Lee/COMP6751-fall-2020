@@ -40,7 +40,7 @@ class SentParser:
                     writer.write(str(tree))
 
             # append the root's senti attribute value to the list
-            senti_label = tree.label()['senti']
+            senti_label = tree.label()['SENTI']
             if senti_label == 'negative' or senti_label == 'positive':
                 sentiment.append(senti_label)
             else:

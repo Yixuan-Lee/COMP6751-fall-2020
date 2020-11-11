@@ -36,7 +36,7 @@ class SentimentPipeline:
         """
         self.parser.clear_directory()
         # retrieve sentiment labels of all possible parse trees
-        sentiments = self.parser.parse(token_list)
+        sentiments = self.parser.parse(token_list[:-1]) # omit the last period
         if len(sentiments) == 0:
             # meaning the parser doesn't have the corresponding gramar for the sentence
             return 'unknown'
@@ -51,6 +51,7 @@ class SentimentPipeline:
         try:
             # tokenization + pos tagging
             # positive sentences
+            cnt = 1
             for pos_sent in self.lexica.get_positive_sents():
                 words = word_tokenize(pos_sent)
                 pos = self.part_of_speech_tagging(words)
@@ -58,14 +59,17 @@ class SentimentPipeline:
                 senti = self.parse_and_sentify(words)
                 # write the sentencee and the ground-truth and the prediction to a result file
                 self.output_results(pos_sent, 'positive', senti)
+                if cnt == 4:
+                    break
+                cnt += 1
             # negative sentences
-            for neg_sent in self.lexica.get_negative_sents():
-                words = word_tokenize(neg_sent)
-                pos = self.part_of_speech_tagging(words)
-                print('part-of-speech:', pos)
-                senti = self.parse_and_sentify(words)
-                # write the ground-truth and prediction to a result file
-                self.output_results(neg_sent, 'negative', senti)
+            # for neg_sent in self.lexica.get_negative_sents():
+            #     words = word_tokenize(neg_sent)
+            #     pos = self.part_of_speech_tagging(words)
+            #     print('part-of-speech:', pos)
+            #     senti = self.parse_and_sentify(words)
+            #     # write the ground-truth and prediction to a result file
+            #     self.output_results(neg_sent, 'negative', senti)
         except Exception as ex:
             print(ex.args[0])
 
@@ -84,8 +88,8 @@ class SentimentPipeline:
         if ground_truth == label:
             # write the sentence and the ground_truth and label to Good.txt
             with open("Good.txt", "a+") as writer:
-                writer.write(sentence)
-                writer.write(ground_truth + '\t' + label)
+                writer.write(sentence + '\r\n')
+                writer.write(ground_truth + '\t|\t' + label + '\r\n')
             if ground_truth == 'negative':
                 self.true_negative += 1
             elif ground_truth == 'positive':
@@ -93,8 +97,8 @@ class SentimentPipeline:
         else:
             # write the sentence and the ground_truth and label to False.txt
             with open("False.txt", "a+") as writer:
-                writer.write(sentence)
-                writer.write(ground_truth + '\t' + label)
+                writer.write(sentence + '\r\n')
+                writer.write(ground_truth + '\t|\t' + label + '\r\n')
             if label == 'negative':
                 self.false_negative += 1
             elif label == 'positive':
