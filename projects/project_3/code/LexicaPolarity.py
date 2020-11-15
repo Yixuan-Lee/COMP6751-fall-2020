@@ -28,7 +28,7 @@ class Polarity:
         :param sent: sentence
         :return: a dictionary containing the polarity
         """
-        sent = sent.replace(',', '')[:-2]
+        sent = sent.replace(',', '')[:-1].rstrip()
         tokens = sent.split(' ')
         polarity = {}
         for t in tokens:
