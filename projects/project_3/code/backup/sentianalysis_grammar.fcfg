@@ -1,0 +1,167 @@
+% start S, NP
+# ###################
+# Grammar Productions
+# ###################
+#
+# Attribute Order:
+# TENSE  -> tense = inf, pres, past, future, pastpart
+# NUM    -> number of subject = sg, pl
+# PERSON -> subject person = 1, 2, 3
+# SENTI  -> sentiment = positive, negative, neutral
+#
+# Other Attributes:
+# S:
+#   +-INV -> inversion?
+# V:
+#   SUBCAT -> verb subcategory = trans, intrans, clause
+#   +-AUX -> auxiliary verb?
+# RB:
+#   +-negation -> negation?
+# CC:
+#   +-and -> and relation?
+#   +-but -> but relation?
+
+
+
+# S expansion productions
+S[SENTI=?s, -INV] -> NP[NUM=?n, PERSON=?p, SENTI=?s] VP[TENSE=?t, NUM=?n, PERSON=?p, SENTI=?s]
+
+## and relation
+S[SENTI=?s, -INV] -> S[SENTI=?s, -INV] CC[+and] S[SENTI=?s, -INV]
+
+## but relation
+S[SENTI=?s, -INV] -> S[SENTI=neutral, -INV] CC[+but] S[SENTI=?s, -INV]
+S[SENTI=negative, -INV] -> S[SENTI=positive, -INV] CC[+but] S[SENTI=negative, -INV]
+S[SENTI=positive, -INV] -> S[SENTI=negative, -INV] CC[+but] S[SENTI=positive, -INV]
+
+
+### -------------------------------------------------------- ###
+# SBAR (subordinary clause) expansion productions
+
+
+
+### -------------------------------------------------------- ###
+# NP (noun phrase) expansion productions
+NP[NUM=?n, PERSON=?p, SENTI=?s] -> N[NUM=?n, PERSON=?p, SENTI=?s] | NNP[NUM=?n, PERSON=?p] | PRP[NUM=?n, PERSON=?p]
+
+## e.g. *this* is not good
+NP[NUM=?n, PERSON=?p, SENTI=?s] -> DT[NUM=?n]
+NP[NUM=?n, PERSON=?p, SENTI=?s] -> DT[NUM=?n] NP[NUM=?n, PERSON=?p, SENTI=?s]
+NP[NUM=?n, PERSON=?p, SENTI=?s] -> JJ[SENTI=?s] NP[NUM=?n, PERSON=?p, SENTI=?s]
+
+### -------------------------------------------------------- ###
+# VP (verb phrase) expansion productions
+VP[TENSE=?t, NUM=?n, PERSON=?p, SENTI=?s] -> V[TENSE=?t, NUM=?n, PERSON=?p, SENTI=?s, SUBCAT=trans] NP[NUM=?n, PERSON=?p, SENTI=?s] | V[TENSE=?t, NUM=?n, PERSON=?p, SENTI=?s, SUBCAT=trans] NP[NUM=?n, PERSON=?p, SENTI=?s] PP
+
+
+## e.g. this *does not have gut-wrenching impact*
+VP[TENSE=?t, NUM=?n, PERSON=?p, SENTI=positive] -> V[TENSE=?t, NUM=?n, PERSON=?p, +AUX] RB[+negation] VP[NUM=?n, SENTI=negative]
+VP[TENSE=?t, NUM=?n, PERSON=?p, SENTI=negative] -> V[TENSE=?t, NUM=?n, PERSON=?p, +AUX] RB[+negation] VP[NUM=?n, SENTI=positive]
+
+### -------------------------------------------------------- ###
+# PP (prepositional phrase) expansion productions
+
+
+
+### -------------------------------------------------------- ###
+# ADJP (adjective phrase) expansion productions
+
+
+
+### -------------------------------------------------------- ###
+# ADVP (adverbial phrase) expansion productions
+
+
+
+# ###################
+# Lexical Productions
+# ###################
+
+# Determiners
+DT[NUM=sg] -> 'a' | 'an' | 'this' | 'This'
+
+### -------------------------------------------------------- ###
+# Modal
+
+
+
+### -------------------------------------------------------- ###
+# Punctuations
+COMMA -> ','
+
+
+### -------------------------------------------------------- ###
+# Proper Nouns
+
+
+
+### -------------------------------------------------------- ###
+# Nouns
+N[NUM=sg] -> 'story' | 'impact'
+
+
+
+### -------------------------------------------------------- ###
+# Possessive Pronoun
+PRP[NUM=sg, PERSON=3] -> 'it' | 'It'
+
+
+### -------------------------------------------------------- ###
+# Prepositions
+
+
+
+### -------------------------------------------------------- ###
+# Coordinating Conjunction
+CC[+and] -> 'and' | 'And'
+CC[+but] -> 'but' | 'But'
+
+
+### -------------------------------------------------------- ###
+# Adjective
+JJ[SENTI=positive] -> 'compelling' | 'gut-wrenching'
+
+JJ[SENTI=negative] -> 'low'
+
+### -------------------------------------------------------- ###
+# Adverb
+RB[+negation] -> 'not' | 'Not' | "n't"
+
+
+### -------------------------------------------------------- ###
+# Number
+
+
+
+### -------------------------------------------------------- ###
+# Verb
+V[TENSE=pres, NUM=sg, PERSON=3, +AUX] -> 'is' | "'s" | 'has' | 'does'
+V[TENSE=inf, SUBCAT=trans, -AUX] -> 'have'
+
+### -------------------------------------------------------- ###
+# Wh-determiner
+
+
+
+### -------------------------------------------------------- ###
+# Wh-pronoun
+
+
+
+
+### -------------------------------------------------------- ###
+# Date
+
+
+
+### -------------------------------------------------------- ###
+# Subordinate introducer
+INTRO -> 'that'
+
+
+
+
+
+
+
+
