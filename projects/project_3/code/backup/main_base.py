@@ -5,7 +5,7 @@ from Lexica import DataLoader
 
 if __name__ == '__main__':
     # define the parser
-    grammar_url = 'grammar/sentianalysis_grammar.fcfg'
+    grammar_url = 'grammar/sentianalysis_grammar_s.fcfg'
     parser = SentParser(grammar_url, False, True, False)
     # load the data from nltk
     data = DataLoader()
