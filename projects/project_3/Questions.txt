@@ -4,31 +4,67 @@
 1. What is the input and expected output for this project?
 
 Input:
+The input is the original sentence.
 
 Output:
+The output is
+    original sentence
+    true label      |       prediction label
+    top two parse trees with corresponding sentiment label
 
 -----------------------------------------------------------------------------
-2. In the output, do we only need to print the original testing sentences and the sentiment labels for the output?
+2. In the output, do we only need to print the original testing sentences and the
+sentiment labels for the output?
 
 (Present my current output)
+The output format is shown above in question 1 answer.
 
 -----------------------------------------------------------------------------
 3. How robust the feature-based grammar should be? and the lexicon should cover?
 
+The baseline is the two sentences in project description. That's the training data.
+We need to develop feature grammar from these two.
+
+In addition, select your testing sentences and ONLY add the lexicon in the new sentences
+to the grammar (keep the grammar production unchanged).
+
 
 -----------------------------------------------------------------------------
-4. Some of the sentence examples are not complete sentences, and also incomplete sentences in rt-polarity.neg and rt-polarity.pos, why?
+4. Some of the sentence examples are not complete sentences, and also incomplete sentences
+in rt-polarity.neg and rt-polarity.pos, why?
 
+In the project description, I only need to label the two sentences:
+
+    1) this may not have the dramatic gut-wrenching impact of other holocaust films , but it’s a compelling story , mainly because of the way it’s told by the people who were there .
+    2) a perfect example of rancid , well-intentioned , but shamelessly manipulative movie making .
+
+The simplified snippets below are the components in the parse trees, not sentences that we need to consider.
+但是如果TA打印parse tree的话需要能看到这些snippets的sentiment labels.
 
 -----------------------------------------------------------------------------
-5. If there are multiple possible parse trees for the same sentence, and some parse trees with 'positive' label and some with 'negative'
-label and some with 'neutral' label, I just let the parse trees vote for the sentiment and label the sentence as the sentiment with
-the most votes, is it valid?
+5. If there are multiple possible parse trees for the same sentence, and some parse trees
+with 'positive' label and some with 'negative' label and some with 'neutral' label, I let
+the parse trees vote for the sentiment and label the sentence as the sentiment with the
+most votes, is it valid?
 
+Yes, it is acceptable, but need to provide the top two parse trees with the sentiment labels.
 
 -----------------------------------------------------------------------------
 6. In report, what we need to discuss? Do you have to limit the page sizes for each section?
 And should we include a Demo report as the previous projects?
 
+Yes, you have to limit the page sizes for each section.
+And in the demo report, provide
+    1) the input sentence
+    2) the ground-truth label
+    3) the prediction sentiment
+    4) the top two parse tree diagrams/text
+
+-----------------------------------------------------------------------------
+7. why the word 'rancid' is labelled as 'neutral' in opinion_lexicon?
+
+
+-----------------------------------------------------------------------------
+8. should I include "neutral" sentiment label?
 
 
