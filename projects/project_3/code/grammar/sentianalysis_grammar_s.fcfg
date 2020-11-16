@@ -26,13 +26,29 @@
 # S expansion productions
 S[SENTI=?s, -INV] -> NP[NUM=?n, PERSON=?p, SENTI=?s] VP[TENSE=?t, NUM=?n, PERSON=?p, SENTI=?s]
 
-## and relation
-S[SENTI=?s, -INV] -> S[SENTI=?s, -INV] CC[+and] S[SENTI=?s, -INV]
+## e.g. a perfect example
+S[SENTI=?s, -INV] -> NP[NUM=?n, PERSON=?p, SENTI=?s]
 
-## but relation
+## e.g. Is this example good or bad?
+S[SENTI=?s, +INV] -> V[+AUX] NP[NUM=?n] ADJP[SENTI=?s]
+
+## and relations
+S[SENTI=positive, -INV] -> S[SENTI=positive, -INV] CC[+and] S[SENTI=positive, -INV] | S[SENTI=positive, -INV] CC[+and] S[SENTI=neutral, -INV] | S[SENTI=neutral, -INV] CC[+and] S[SENTI=positive, -INV]
+S[SENTI=negative, -INV] -> S[SENTI=negative, -INV] CC[+and] S[SENTI=negative, -INV] | S[SENTI=negative, -INV] CC[+and] S[SENTI=neutral, -INV] | S[SENTI=neutral, -INV] CC[+and] S[SENTI=negative, -INV]
+S[SENTI=neutral, -INV] -> S[SENTI=neutral, -INV] CC[+and] S[SENTI=neutral, -INV]
+
+## but relations
 S[SENTI=?s, -INV] -> S[SENTI=neutral, -INV] CC[+but] S[SENTI=?s, -INV]
-S[SENTI=negative, -INV] -> S[SENTI=positive, -INV] CC[+but] S[SENTI=negative, -INV]
-S[SENTI=positive, -INV] -> S[SENTI=negative, -INV] CC[+but] S[SENTI=positive, -INV]
+## e.g. it is a compelling story but it has low impact
+S[SENTI=negative, -INV] -> S[SENTI=positive, -INV] CC[+but] S[SENTI=negative, -INV] | S[SENTI=positive, -INV] CC[+but] S[SENTI=neutral, -INV]
+S[SENTI=positive, -INV] -> S[SENTI=negative, -INV] CC[+but] S[SENTI=positive, -INV] | S[SENTI=negative, -INV] CC[+but] S[SENTI=neutral, -INV]
+## e.g. it is a compelling story , but it has low impact
+S[SENTI=negative, -INV] -> S[SENTI=positive, -INV] COMMA CC[+but] S[SENTI=negative, -INV] | S[SENTI=positive, -INV] COMMA CC[+but] S[SENTI=neutral, -INV]
+S[SENTI=positive, -INV] -> S[SENTI=negative, -INV] COMMA CC[+but] S[SENTI=positive, -INV] | S[SENTI=negative, -INV] COMMA CC[+but] S[SENTI=neutral, -INV]
+
+## or relation
+S[SENTI=?s, -INV] -> S[SENTI=?s, -INV] CC[+or] S[SENTI=?s, -INV]
+S[SENTI=neutral, -INV] -> S[SENTI=positive, -INV] CC[+or] S[SENTI=negative, -INV] | S[SENTI=negative, -INV] CC[+or] S[SENTI=positive, -INV]
 
 
 ### -------------------------------------------------------- ###
@@ -46,8 +62,15 @@ NP[NUM=?n, PERSON=?p, SENTI=?s] -> N[NUM=?n, PERSON=?p, SENTI=?s] | NNP[NUM=?n, 
 
 ## e.g. *this* is not good
 NP[NUM=?n, PERSON=?p, SENTI=?s] -> DT[NUM=?n]
+## e.g. this is *an example*
 NP[NUM=?n, PERSON=?p, SENTI=?s] -> DT[NUM=?n] NP[NUM=?n, PERSON=?p, SENTI=?s]
-NP[NUM=?n, PERSON=?p, SENTI=?s] -> JJ[SENTI=?s] NP[NUM=?n, PERSON=?p, SENTI=?s]
+## e.g. this is a *perfect example*
+NP[NUM=?n, PERSON=?p, SENTI=?s] -> JJ[SENTI=?s] NP[NUM=?n, PERSON=?p] | JJ[SENTI=neutral] NP[NUM=?n, PERSON=?p, SENTI=?s] | JJ[SENTI=?s] NP[NUM=?n, PERSON=?p, SENTI=?s]
+## e.g. movie making
+NP[NUM=?n, PERSON=?p, SENTI=?s] -> N[NUM=?n, PERSON=?p, SENTI=?s] NP[NUM=?n, PERSON=?p, SENTI=?s]
+## e.g. shamelessly manipulative movie making
+NP[NUM=?n, PERSON=?p, SENTI=?s] -> ADJP[SENTI=?s] NP[NUM=?n, PERSON=?p, SENTI=?s] | ADJP[SENTI=?s] NP[NUM=?n, PERSON=?p] | ADJP[SENTI=neutral] NP[NUM=?n, PERSON=?p, SENTI=?s]
+
 
 ### -------------------------------------------------------- ###
 # VP (verb phrase) expansion productions
@@ -65,7 +88,17 @@ VP[TENSE=?t, NUM=?n, PERSON=?p, SENTI=negative] -> V[TENSE=?t, NUM=?n, PERSON=?p
 
 ### -------------------------------------------------------- ###
 # ADJP (adjective phrase) expansion productions
-
+## e.g. dull and scary and boring
+ADJP[SENTI=?s] -> JJ[SENTI=?s] CC[+and] JJ[SENTI=?s] | JJ[SENTI=?s] CC[+and] ADJP[SENTI=?s]
+## e.g. dull, scary and boring
+ADJP[SENTI=?s] -> JJ[SENTI=?s] COMMA ADJP[SENTI=?s]
+## e.g. long but entertaining
+ADJP[SENTI=?s] -> JJ CC[+but] JJ[SENTI=?s]
+## e.g. good or bad
+ADJP[SENTI=?s] -> JJ[SENTI=?s] CC[+or] JJ[SENTI=?s]
+ADJP[SENTI=neutral] -> JJ[SENTI=positive] CC[+or] JJ[SENTI=negative] | JJ[SENTI=negative] CC[+or] JJ[SENTI=positive]
+## e.g. shamelessly manipulative
+ADJP[SENTI=?s] -> RB[SENTI=?s] JJ[SENTI=?s]
 
 
 ### -------------------------------------------------------- ###
@@ -78,7 +111,7 @@ VP[TENSE=?t, NUM=?n, PERSON=?p, SENTI=negative] -> V[TENSE=?t, NUM=?n, PERSON=?p
 # ###################
 
 # Determiners
-DT[NUM=sg] -> 'a' | 'an' | 'this' | 'This'
+DT[NUM=sg] -> 'a' | 'an' | 'this' | 'This' | 'the'
 
 ### -------------------------------------------------------- ###
 # Modal
@@ -97,7 +130,7 @@ COMMA -> ','
 
 ### -------------------------------------------------------- ###
 # Nouns
-N[NUM=sg] -> 'story' | 'impact'
+N[NUM=sg, SENTI=neutral] -> 'story' | 'impact' | 'example' | 'movie' | 'making'
 
 
 
@@ -113,20 +146,21 @@ PRP[NUM=sg, PERSON=3] -> 'it' | 'It'
 
 ### -------------------------------------------------------- ###
 # Coordinating Conjunction
-CC[+and] -> 'and' | 'And'
-CC[+but] -> 'but' | 'But'
+CC[+and, -but, -or] -> 'and' | 'And'
+CC[-and, +but, -or] -> 'but' | 'But'
+CC[-and, -but, +or] -> 'or' | 'Or'
 
 
 ### -------------------------------------------------------- ###
 # Adjective
-JJ[SENTI=positive] -> 'compelling' | 'gut-wrenching'
-
-JJ[SENTI=negative] -> 'low'
+JJ[SENTI=positive] -> 'compelling' | 'perfect' | 'well-intentioned'
+JJ[SENTI=negative] -> 'manipulative' | 'rancid'
+JJ[SENTI=neutral] -> 'dramatic' | 'gut-wrenching' | 'low'
 
 ### -------------------------------------------------------- ###
 # Adverb
 RB[+negation] -> 'not' | 'Not' | "n't"
-
+RB[SENTI=negative, -negation] -> 'shamelessly'
 
 ### -------------------------------------------------------- ###
 # Number
@@ -136,6 +170,7 @@ RB[+negation] -> 'not' | 'Not' | "n't"
 ### -------------------------------------------------------- ###
 # Verb
 V[TENSE=pres, NUM=sg, PERSON=3, +AUX] -> 'is' | "'s" | 'has' | 'does'
+V[TENSE=inf, +AUX] -> 'may'
 V[TENSE=inf, SUBCAT=trans, -AUX] -> 'have'
 
 ### -------------------------------------------------------- ###
