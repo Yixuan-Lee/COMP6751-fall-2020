@@ -9,9 +9,20 @@ class DataLoader:
         """
         self.positive_sentences = []
         self.negative_sentences = []
+        self.neutral_sentences = []
 
-        positive_filepath = input('Input the file path containing positive sentences: ')
-        negative_filepath = input('Input the file path containing negative sentences: ')
+        response = input('Are you going to use default testing files? (Y/N) ')
+        if response.lower() == 'y' or response.lower() == 'yes':
+            # positive_filepath = 'data/positive.txt'
+            # negative_filepath = 'data/negative.txt'
+            # neutral_filepath = 'data/neutral.txt'
+            positive_filepath = 'p.txt'
+            negative_filepath = 'n.txt'
+            neutral_filepath = 'neu.txt'
+        else:
+            positive_filepath = input('Input your file path containing positive sentences: ')
+            negative_filepath = input('Input your file path containing negative sentences: ')
+            neutral_filepath = input('Input your file path containing neutral sentences: ')
 
         # read positive sentences
         if os.path.exists(positive_filepath):
@@ -29,11 +40,22 @@ class DataLoader:
         else:
             print(negative_filepath + ' does not exist on local.')
 
+        # read neutral sentences
+        if os.path.exists(neutral_filepath):
+            with open(neutral_filepath, "r") as reader:
+                self.neutral_sentences = reader.readlines()
+            self.neutral_sentences = [sent.rstrip() for sent in self.neutral_sentences]
+        else:
+            print(neutral_filepath + ' does not exist on local.')
+
     def get_negative_sents(self) -> List[str]:
         return self.negative_sentences
 
     def get_positive_sents(self) -> List[str]:
         return self.positive_sentences
+
+    def get_neutral_sents(self) -> List[str]:
+        return self.neutral_sentences
 
 
 # for testing DataLoader

@@ -2,7 +2,7 @@ import nltk
 from nltk import word_tokenize
 from Parser import SentParser
 from Lexica import DataLoader
-from typing import List, Tuple
+from typing import List, Tuple, Dict, Any
 from collections import Counter
 
 
@@ -16,9 +16,11 @@ class SentimentPipeline:
         self.parser = parser
         self.lexica = lexica
         self.true_positive = 0
-        self.true_negative = 0
         self.false_positive = 0
+        self.true_negative = 0
         self.false_negative = 0
+        self.true_neutral = 0
+        self.false_neutral = 0
 
     def part_of_speech_tagging(self, words: List[str]) -> List[Tuple[str, str]]:
         """
@@ -28,7 +30,7 @@ class SentimentPipeline:
         normal_pos_tag = nltk.pos_tag(words[:-1])   # omit the last period
         return normal_pos_tag
 
-    def parse_and_sentify(self, token_list: List[str]) -> str:
+    def parse_and_sentify(self, token_list: List[str]) -> Tuple[List[Tuple[Any, int]], Dict[str, str]]:
         """
         parse the sentence
         :param token_list: tokens of a sentence
@@ -36,13 +38,9 @@ class SentimentPipeline:
         """
         self.parser.clear_directory()
         # retrieve sentiment labels of all possible parse trees
-        sentiments = self.parser.parse(token_list[:-1]) # omit the last period
-        if len(sentiments) == 0:
-            # meaning the parser doesn't have the corresponding gramar for the sentence
-            return 'unknown'
-        else:
-            # return the most probable sentiment
-            return Counter(sentiments).most_common()[0][0]
+        sentiments, parse_trees = self.parser.parse(token_list[:-1]) # omit the last period
+        # return the most probable sentiment
+        return Counter(sentiments).most_common(), parse_trees
 
     def run_pipeline(self) -> None:
         """
@@ -51,29 +49,33 @@ class SentimentPipeline:
         try:
             # tokenization + pos tagging
             # positive sentences
-            cnt = 1
             for pos_sent in self.lexica.get_positive_sents():
                 words = word_tokenize(pos_sent)
                 pos = self.part_of_speech_tagging(words)
                 print('part-of-speech:', pos)
-                senti = self.parse_and_sentify(words)
+                senti, trees = self.parse_and_sentify(words)
                 # write the sentencee and the ground-truth and the prediction to a result file
-                self.output_results(pos_sent, 'positive', senti)
-                if cnt == 4:
-                    break
-                cnt += 1
+                self.output_results(pos_sent, 'positive', senti, trees)
             # negative sentences
-            # for neg_sent in self.lexica.get_negative_sents():
-            #     words = word_tokenize(neg_sent)
-            #     pos = self.part_of_speech_tagging(words)
-            #     print('part-of-speech:', pos)
-            #     senti = self.parse_and_sentify(words)
-            #     # write the ground-truth and prediction to a result file
-            #     self.output_results(neg_sent, 'negative', senti)
+            for neg_sent in self.lexica.get_negative_sents():
+                words = word_tokenize(neg_sent)
+                pos = self.part_of_speech_tagging(words)
+                print('part-of-speech:', pos)
+                senti, trees = self.parse_and_sentify(words)
+                # write the ground-truth and prediction to a result file
+                self.output_results(neg_sent, 'negative', senti, trees)
+            # neutral sentences
+            for neu_sent in self.lexica.get_neutral_sents():
+                words = word_tokenize(neu_sent)
+                pos = self.part_of_speech_tagging(words)
+                print('part-of-speech:', pos)
+                senti, trees = self.parse_and_sentify(words)
+                # write the ground-truth and prediction to a result file
+                self.output_results(neu_sent, 'neutral', senti, trees)
         except Exception as ex:
             print(ex.args[0])
 
-    def output_results(self, sentence: str, ground_truth: str, label: str) -> None:
+    def output_results(self, sentence: str, ground_truth: str, labels: List[Tuple[Any, int]], trees: Dict[str, str]) -> None:
         """
         write the result with the following format
             sentence1
@@ -85,24 +87,56 @@ class SentimentPipeline:
         :param ground_truth: ground-truth label
         :param label: prediction label
         """
-        if ground_truth == label:
+        if ground_truth in [label[0] for label in labels]:
             # write the sentence and the ground_truth and label to Good.txt
             with open("Good.txt", "a+") as writer:
+                # write the input sentence
                 writer.write(sentence + '\r\n')
-                writer.write(ground_truth + '\t|\t' + label + '\r\n')
+                # write the ground-truth label
+                writer.write(ground_truth + '\t|\t')
+                # write the prediction labels
+                writer.write('[')
+                for i in range(len(labels)-1):
+                    writer.write(labels[i][0] + ', ')
+                writer.write(labels[-1][0] + ']')
+                writer.write('\r\n\r\n')
+                # write the first tree with prediction label that has the most votes
+                for label in labels:
+                    writer.write(trees[label[0]][0])
+                    writer.write('\r\n')
+                writer.write('-------------------------------------------------------------------\r\n')
+            # record performance
             if ground_truth == 'negative':
                 self.true_negative += 1
             elif ground_truth == 'positive':
                 self.true_positive += 1
+            elif ground_truth == 'neutral':
+                self.true_neutral += 1
         else:
             # write the sentence and the ground_truth and label to False.txt
             with open("False.txt", "a+") as writer:
+                # write the input sentence
                 writer.write(sentence + '\r\n')
-                writer.write(ground_truth + '\t|\t' + label + '\r\n')
-            if label == 'negative':
+                # write the ground-truth label
+                writer.write(ground_truth + '\t|\t')
+                # write the prediction labels
+                writer.write('[')
+                for i in range(len(labels) - 1):
+                    writer.write(labels[i][0] + ', ')
+                writer.write(labels[-1][0] + ']')
+                writer.write('\r\n\r\n')
+                # write the first tree with prediction label that has the most votes
+                for label in labels:
+                    writer.write(trees[label[0]][0])
+                    writer.write('\r\n')
+                writer.write('-------------------------------------------------------------------\r\n')
+            # record performance
+            if 'negative' in labels:
                 self.false_negative += 1
-            elif label == 'positive':
+            if 'positive' in labels:
                 self.false_positive += 1
+            if 'neutral' in labels:
+                self.false_neutral += 1
 
     def performance(self) -> None:
         recall = self.true_positive / (self.true_positive + self.false_negative)
