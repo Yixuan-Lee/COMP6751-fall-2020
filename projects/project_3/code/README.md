@@ -23,5 +23,7 @@
 
 9. [append data to a file in python](https://stackoverflow.com/questions/4706499/how-do-you-append-to-a-file-in-python)
 
+10. [download opinion_lexicon Dataset on Kaggle](https://www.kaggle.com/nltkdata/opinion-lexicon)
+
 
 
