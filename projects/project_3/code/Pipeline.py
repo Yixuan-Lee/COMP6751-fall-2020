@@ -89,7 +89,7 @@ class SentimentPipeline:
         """
         if ground_truth in [label[0] for label in labels]:
             # write the sentence and the ground_truth and label to Good.txt
-            with open("Good.txt", "a+") as writer:
+            with open("saved_results/Good.txt", "a+") as writer:
                 # write the input sentence
                 writer.write(sentence + '\r\n')
                 # write the ground-truth label
@@ -114,7 +114,7 @@ class SentimentPipeline:
                 self.true_neutral += 1
         else:
             # write the sentence and the ground_truth and label to False.txt
-            with open("False.txt", "a+") as writer:
+            with open("saved_results/False.txt", "a+") as writer:
                 # write the input sentence
                 writer.write(sentence + '\r\n')
                 # write the ground-truth label

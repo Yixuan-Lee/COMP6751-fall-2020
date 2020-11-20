@@ -11,18 +11,19 @@ class DataLoader:
         self.negative_sentences = []
         self.neutral_sentences = []
 
-        response = input('Are you going to use default testing files? (Y/N) ')
+        # response = input('Are you going to use default testing files? (Y/N) ')
+        response = "Yes"
         if response.lower() == 'y' or response.lower() == 'yes':
-            # positive_filepath = 'data/positive.txt'
-            # negative_filepath = 'data/negative.txt'
-            # neutral_filepath = 'data/neutral.txt'
-            positive_filepath = 'p.txt'
-            negative_filepath = 'n.txt'
-            neutral_filepath = 'neu.txt'
+            positive_filepath = 'data/positive.txt'
+            negative_filepath = 'data/negative.txt'
+            neutral_filepath = 'data/neutral.txt'
         else:
             positive_filepath = input('Input your file path containing positive sentences: ')
             negative_filepath = input('Input your file path containing negative sentences: ')
             neutral_filepath = input('Input your file path containing neutral sentences: ')
+        print('positive file path:', positive_filepath)
+        print('negative file path:', negative_filepath)
+        print('neutral file path:', neutral_filepath)
 
         # read positive sentences
         if os.path.exists(positive_filepath):

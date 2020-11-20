@@ -3,24 +3,29 @@
 # Grammar Productions
 # ###################
 #
-# Attribute Order:
-# TENSE  -> tense = inf, pres, past, future, pastpart
-# NUM    -> number of subject = sg, pl
-# PERSON -> subject person = 1, 2, 3
-# SENTI  -> sentiment = positive, negative, neutral
+# Common Attributes:
+#   TENSE  -> tense = inf, pres, past, future, pastpart
+#   NUM    -> number of subject = sg, pl
+#   PERSON -> subject person = 1, 2, 3
+#   SENTI  -> sentiment = positive, negative, neutral
 #
 # Other Attributes:
 # S:
 #   +-INV -> inversion?
 # V:
-#   SUBCAT -> verb subcategory = trans, intrans, clause
+#   SUBCAT -> verb subcategory = trans, intrans, clause, dative
 #   +-AUX -> auxiliary verb?
+#   +-passive -> passive mode
 # RB:
 #   +-negation -> negation?
 # CC:
 #   +-and -> and relation?
 #   +-but -> but relation?
-
+#   +-or  -> or relation?
+# WP:
+#   +-wh -> heading by 'wh'
+# IN:
+#   +-of -> of
 
 
 # S expansion productions
@@ -53,7 +58,10 @@ S[SENTI=neutral, -INV] -> S[SENTI=positive, -INV] CC[+or] S[SENTI=negative, -INV
 
 ### -------------------------------------------------------- ###
 # SBAR (subordinary clause) expansion productions
-
+## the people *who were there*
+SBAR[SENTI=?s] -> WP[+wh] V[+AUX] EX
+## the way *it's told by people who were there*
+SBAR[SENTI=?s] -> S[SENTI=?s] SBAR[SENTI=?s]
 
 
 ### -------------------------------------------------------- ###
@@ -62,28 +70,54 @@ NP[NUM=?n, PERSON=?p, SENTI=?s] -> N[NUM=?n, PERSON=?p, SENTI=?s] | NNP[NUM=?n, 
 
 ## e.g. *this* is not good
 NP[NUM=?n, PERSON=?p, SENTI=?s] -> DT[NUM=?n]
-## e.g. this is *an example*
-NP[NUM=?n, PERSON=?p, SENTI=?s] -> DT[NUM=?n] NP[NUM=?n, PERSON=?p, SENTI=?s]
+## e.g. this is *an example*, *a perfect example of well-intentioned but manipulated movie making*
+NP[NUM=?n, PERSON=?p, SENTI=?s] -> DT[NUM=?n] NP[NUM=?n, PERSON=?p, SENTI=?s] | DT[NUM=?n] NP[NUM=?n, PERSON=?p] PP[SENTI=?s] | DT[NUM=?n] NP[NUM=?n, PERSON=?p, SENTI=?s] PP
 ## e.g. this is a *perfect example*
 NP[NUM=?n, PERSON=?p, SENTI=?s] -> JJ[SENTI=?s] NP[NUM=?n, PERSON=?p] | JJ[SENTI=neutral] NP[NUM=?n, PERSON=?p, SENTI=?s] | JJ[SENTI=?s] NP[NUM=?n, PERSON=?p, SENTI=?s]
 ## e.g. movie making
-NP[NUM=?n, PERSON=?p, SENTI=?s] -> N[NUM=?n, PERSON=?p, SENTI=?s] NP[NUM=?n, PERSON=?p, SENTI=?s]
+NP[NUM=?n, PERSON=?p, SENTI=?s] -> N NP[NUM=?n, PERSON=?p, SENTI=?s]
 ## e.g. shamelessly manipulative movie making
 NP[NUM=?n, PERSON=?p, SENTI=?s] -> ADJP[SENTI=?s] NP[NUM=?n, PERSON=?p, SENTI=?s] | ADJP[SENTI=?s] NP[NUM=?n, PERSON=?p] | ADJP[SENTI=neutral] NP[NUM=?n, PERSON=?p, SENTI=?s]
+## e.g. the way it's told by the people who were there
+NP[NUM=?n, PERSON=?p, SENTI=?s] -> NP[NUM=?n, PERSON=?p, SENTI=?s] SBAR[SENTI=?s]
+## e.g. an *example of moving making*
+NP[NUM=?n, PERSON=?p, SENTI=?s] -> NP[NUM=?n, PERSON=?p, SENTI=?s] IN[+of] NP | NP[NUM=?n, PERSON=?p] IN[+of] NP[SENTI=?s]
+
+## e.g. it was *a mess and a hazard*, it was *a good example and a positive review*
+NP[NUM=?n, PERSON=?p, SENTI=?s] -> NP[NUM=?n, PERSON=?p, SENTI=?s] CC[+and] NP[NUM=?n, PERSON=?p, SENTI=?s] | NP[NUM=?n, PERSON=?p, SENTI=neutral] CC[+and] NP[NUM=?n, PERSON=?p, SENTI=?s] | NP[NUM=?n, PERSON=?p, SENTI=?s] CC[+and] NP[NUM=?n, PERSON=?p, SENTI=neutral]
+## e.g. it was *a negative review or a positive review*
+NP[NUM=?n, PERSON=?p, SENTI=?s] -> NP[NUM=?n, PERSON=?p, SENTI=?s] CC[+or] NP[NUM=?n, PERSON=?p] | NP[NUM=?n, PERSON=?p] CC[+or] NP[NUM=?n, PERSON=?p, SENTI=?s]
+NP[NUM=?n, PERSON=?p, SENTI=neutral] -> NP[NUM=?n, PERSON=?p, SENTI=positive] CC[+or] NP[NUM=?n, PERSON=?p, SENTI=negative] | NP[NUM=?n, PERSON=?p, SENTI=negative] CC[+or] NP[NUM=?n, PERSON=?p, SENTI=positive]
 
 
 ### -------------------------------------------------------- ###
 # VP (verb phrase) expansion productions
-VP[TENSE=?t, NUM=?n, PERSON=?p, SENTI=?s] -> V[TENSE=?t, NUM=?n, PERSON=?p, SENTI=?s, SUBCAT=trans] NP[NUM=?n, PERSON=?p, SENTI=?s] | V[TENSE=?t, NUM=?n, PERSON=?p, SENTI=?s, SUBCAT=trans] NP[NUM=?n, PERSON=?p, SENTI=?s] PP
-
+VP[TENSE=?t, NUM=?n, PERSON=?p, SENTI=?s] -> V[TENSE=?t, NUM=?n, PERSON=?p, SENTI=?s, SUBCAT=trans] NP[NUM=?n, PERSON=?p, SENTI=?s]
+VP[TENSE=?t, NUM=?n, PERSON=?p, SENTI=?s] -> V[TENSE=?t, NUM=?n, PERSON=?p, SENTI=?s, SUBCAT=trans] NP[NUM=?n, PERSON=?p, SENTI=?s] PP | V[TENSE=?t, NUM=?n, PERSON=?p, SENTI=?s, SUBCAT=trans] NP[NUM=?n, PERSON=?p, SENTI=?s] COMMA PP
 
 ## e.g. this *does not have gut-wrenching impact*
+VP[TENSE=?t, NUM=?n, PERSON=?p, SENTI=?s] -> V[TENSE=?t, NUM=?n, PERSON=?p, +AUX] RB[+negation] VP[NUM=?n, SENTI=neutral]
 VP[TENSE=?t, NUM=?n, PERSON=?p, SENTI=positive] -> V[TENSE=?t, NUM=?n, PERSON=?p, +AUX] RB[+negation] VP[NUM=?n, SENTI=negative]
 VP[TENSE=?t, NUM=?n, PERSON=?p, SENTI=negative] -> V[TENSE=?t, NUM=?n, PERSON=?p, +AUX] RB[+negation] VP[NUM=?n, SENTI=positive]
 
+## e.g. this *may not have the dramatic gut-wrenching impact of other holocaust films*
+VP[TENSE=?t, NUM=?n, PERSON=?p, SENTI=?s] -> MD RB[+negation] VP[TENSE=?t, NUM=?n, PERSON=?p, SENTI=?s]
+VP[TENSE=?t, NUM=?n, PERSON=?p, SENTI=positive] -> MD RB[+negation] VP[TENSE=?t, NUM=?n, PERSON=?p, SENTI=negative]
+VP[TENSE=?t, NUM=?n, PERSON=?p, SENTI=negative] -> MD RB[+negation] VP[TENSE=?t, NUM=?n, PERSON=?p, SENTI=positive]
+
+## e.g. it*'s told by the people*
+VP[TENSE=?t, NUM=?n, PERSON=?p, SENTI=?s] -> V[TENSE=?t, NUM=?n, PERSON=?p, +AUX, -passive] V[SUBCAT=trans, -AUX, +passive] PP[SENTI=?s]
+
+## e.g. He *gave her a sweater*
+VP[TENSE=?t, NUM=?n, PERSON=?p, SENTI=?s] -> V[TENSE=?t, NUM=?n, PERSON=?p, SENTI=?s, SUBCAT=dative] NP[NUM=?n, PERSON=?p] NP[SENTI=?s]
+
+## e.g. it *was too long but entertaining*
+VP[TENSE=?t, NUM=?n, PERSON=?p, SENTI=?s] -> V[TENSE=?t, NUM=?n, PERSON=?p, +AUX, -passive] JJ[SENTI=?s] | V[TENSE=?t, NUM=?n, PERSON=?p, +AUX, -passive] ADJP[SENTI=?s]
+
+
 ### -------------------------------------------------------- ###
 # PP (prepositional phrase) expansion productions
-
+PP[SENTI=?s] -> IN[-of] NP[SENTI=?s] | RB[-negation] IN[-of] IN[+of] NP[SENTI=?s]
 
 
 ### -------------------------------------------------------- ###
@@ -92,18 +126,21 @@ VP[TENSE=?t, NUM=?n, PERSON=?p, SENTI=negative] -> V[TENSE=?t, NUM=?n, PERSON=?p
 ADJP[SENTI=?s] -> JJ[SENTI=?s] CC[+and] JJ[SENTI=?s] | JJ[SENTI=?s] CC[+and] ADJP[SENTI=?s]
 ## e.g. dull, scary and boring
 ADJP[SENTI=?s] -> JJ[SENTI=?s] COMMA ADJP[SENTI=?s]
-## e.g. long but entertaining
+## e.g. well-intentioned but manipulative
 ADJP[SENTI=?s] -> JJ CC[+but] JJ[SENTI=?s]
+## e.g. well-intentioned , but shamelessly manipulative
+ADJP[SENTI=?s] -> JJ COMMA CC[+but] JJ[SENTI=?s] | JJ COMMA CC[+but] ADJP[SENTI=?s]
 ## e.g. good or bad
 ADJP[SENTI=?s] -> JJ[SENTI=?s] CC[+or] JJ[SENTI=?s]
 ADJP[SENTI=neutral] -> JJ[SENTI=positive] CC[+or] JJ[SENTI=negative] | JJ[SENTI=negative] CC[+or] JJ[SENTI=positive]
 ## e.g. shamelessly manipulative
-ADJP[SENTI=?s] -> RB[SENTI=?s] JJ[SENTI=?s]
+ADJP[SENTI=?s] -> RB[SENTI=?s, -negation] JJ[SENTI=?s]
+## e.g. too long but entertaining
+ADJP[SENTI=?s] -> RB[-negation] ADJP[SENTI=?s]
 
 
 ### -------------------------------------------------------- ###
 # ADVP (adverbial phrase) expansion productions
-
 
 
 # ###################
@@ -113,9 +150,10 @@ ADJP[SENTI=?s] -> RB[SENTI=?s] JJ[SENTI=?s]
 # Determiners
 DT[NUM=sg] -> 'a' | 'an' | 'this' | 'This' | 'the'
 
+
 ### -------------------------------------------------------- ###
 # Modal
-
+MD -> 'may'
 
 
 ### -------------------------------------------------------- ###
@@ -127,21 +165,23 @@ COMMA -> ','
 # Proper Nouns
 
 
-
 ### -------------------------------------------------------- ###
 # Nouns
-N[NUM=sg, SENTI=neutral] -> 'story' | 'impact' | 'example' | 'movie' | 'making'
-
+N[NUM=sg, SENTI=neutral] -> 'story' | 'impact' | 'example' | 'movie' | 'making' | 'way' | 'sweater'
+N[NUM=pl, SENTI=neutral] -> 'films' | 'people'
+N[NUM=sg, SENTI=negative] -> 'holocaust' | 'mess' | 'hazard'
 
 
 ### -------------------------------------------------------- ###
 # Possessive Pronoun
-PRP[NUM=sg, PERSON=3] -> 'it' | 'It'
+PRP[NUM=sg, PERSON=1] -> 'I'
+PRP[NUM=sg, PERSON=3] -> 'it' | 'It' | 'He' | 'her'
 
 
 ### -------------------------------------------------------- ###
 # Prepositions
-
+IN[-of] -> 'with' | 'because' | 'by'
+IN[+of] -> 'of'
 
 
 ### -------------------------------------------------------- ###
@@ -153,40 +193,41 @@ CC[-and, -but, +or] -> 'or' | 'Or'
 
 ### -------------------------------------------------------- ###
 # Adjective
-JJ[SENTI=positive] -> 'compelling' | 'perfect' | 'well-intentioned'
-JJ[SENTI=negative] -> 'manipulative' | 'rancid'
-JJ[SENTI=neutral] -> 'dramatic' | 'gut-wrenching' | 'low'
+JJ[SENTI=positive] -> 'compelling' | 'perfect' | 'well-intentioned' | 'entertaining'
+JJ[SENTI=negative] -> 'manipulative' | 'rancid' | 'ugly' | 'dull' | 'scary'
+JJ[SENTI=neutral] -> 'dramatic' | 'gut-wrenching' | 'low' | 'other' | 'long'
+
 
 ### -------------------------------------------------------- ###
 # Adverb
 RB[+negation] -> 'not' | 'Not' | "n't"
+RB[SENTI=neutral, -negation] -> 'mainly' | 'too'
 RB[SENTI=negative, -negation] -> 'shamelessly'
+
 
 ### -------------------------------------------------------- ###
 # Number
 
 
-
 ### -------------------------------------------------------- ###
 # Verb
-V[TENSE=pres, NUM=sg, PERSON=3, +AUX] -> 'is' | "'s" | 'has' | 'does'
-V[TENSE=inf, +AUX] -> 'may'
-V[TENSE=inf, SUBCAT=trans, -AUX] -> 'have'
+V[TENSE=pres, NUM=sg, PERSON=3, +AUX, -passive] -> 'is' | "'s" | 'has' | 'does'
+V[TENSE=inf, +AUX, -passive] -> 'may'
+V[TENSE=inf, SUBCAT=trans, -AUX, -passive] -> 'have'
+V[TENSE=past, NUM=sg, +AUX, -passive] -> 'was'
+V[TENSE=past, NUM=pl, +AUX, -passive] -> 'were'
+V[TENSE=past, SUBCAT=trans, -AUX, -passive] -> 'saw'
+V[TENSE=past, SUBCAT=dative, -AUX, -passive] -> 'gave'
+V[SUBCAT=trans, -AUX, +passive] -> 'told'
+
 
 ### -------------------------------------------------------- ###
 # Wh-determiner
 
 
-
 ### -------------------------------------------------------- ###
 # Wh-pronoun
-
-
-
-
-### -------------------------------------------------------- ###
-# Date
-
+WP[+wh] -> 'who'
 
 
 ### -------------------------------------------------------- ###
@@ -194,9 +235,7 @@ V[TENSE=inf, SUBCAT=trans, -AUX] -> 'have'
 INTRO -> 'that'
 
 
-
-
-
-
-
+### -------------------------------------------------------- ###
+# Existential introducer
+EX -> 'there' | 'here'
 
