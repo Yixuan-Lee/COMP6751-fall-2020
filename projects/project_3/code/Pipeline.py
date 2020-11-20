@@ -36,7 +36,6 @@ class SentimentPipeline:
         :param token_list: tokens of a sentence
         :return return the most possible sentiment
         """
-        self.parser.clear_directory()
         # retrieve sentiment labels of all possible parse trees
         sentiments, parse_trees = self.parser.parse(token_list[:-1]) # omit the last period
         # return the most probable sentiment
@@ -47,12 +46,15 @@ class SentimentPipeline:
         run the sentiment pipeline
         """
         try:
+            # clear the previous result files
+            self.parser.clear_directory()
             # tokenization + pos tagging
             # positive sentences
             for pos_sent in self.lexica.get_positive_sents():
                 words = word_tokenize(pos_sent)
                 pos = self.part_of_speech_tagging(words)
-                print('part-of-speech:', pos)
+                # print('part-of-speech:', pos)
+                print('analyzing sentence:', pos_sent)
                 senti, trees = self.parse_and_sentify(words)
                 # write the sentencee and the ground-truth and the prediction to a result file
                 self.output_results(pos_sent, 'positive', senti, trees)
@@ -60,7 +62,8 @@ class SentimentPipeline:
             for neg_sent in self.lexica.get_negative_sents():
                 words = word_tokenize(neg_sent)
                 pos = self.part_of_speech_tagging(words)
-                print('part-of-speech:', pos)
+                # print('part-of-speech:', pos)
+                print('analyzing sentence:', neg_sent)
                 senti, trees = self.parse_and_sentify(words)
                 # write the ground-truth and prediction to a result file
                 self.output_results(neg_sent, 'negative', senti, trees)
@@ -68,7 +71,8 @@ class SentimentPipeline:
             for neu_sent in self.lexica.get_neutral_sents():
                 words = word_tokenize(neu_sent)
                 pos = self.part_of_speech_tagging(words)
-                print('part-of-speech:', pos)
+                # print('part-of-speech:', pos)
+                print('analyzing sentence:', neu_sent)
                 senti, trees = self.parse_and_sentify(words)
                 # write the ground-truth and prediction to a result file
                 self.output_results(neu_sent, 'neutral', senti, trees)

@@ -57,9 +57,10 @@ class SentParser:
         """
         clear the saved_results directory
         """
-        if self.save:
-            # delete all files in ./saved_results/ directory
-            dir = 'saved_results/'
-            filelist = [f for f in os.listdir(dir)]
-            for f in filelist:
-                os.remove(os.path.join(dir, f))
+        # delete all files in ./saved_results/ directory
+        print("clearing the files in 'saved_results/' directory...")
+        print()
+        dir = 'saved_results/'
+        filelist = [f for f in os.listdir(dir)]
+        for f in filelist:
+            os.remove(os.path.join(dir, f))

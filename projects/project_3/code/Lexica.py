@@ -24,6 +24,7 @@ class DataLoader:
         print('positive file path:', positive_filepath)
         print('negative file path:', negative_filepath)
         print('neutral file path:', neutral_filepath)
+        print()
 
         # read positive sentences
         if os.path.exists(positive_filepath):
@@ -59,8 +60,8 @@ class DataLoader:
         return self.neutral_sentences
 
 
-# for testing DataLoader
-if __name__ == '__main__':
-    d = DataLoader()
-    print(len(d.get_negative_sents()))
-    print(len(d.get_positive_sents()))
+# # for testing DataLoader
+# if __name__ == '__main__':
+#     d = DataLoader()
+#     print(len(d.get_negative_sents()))
+#     print(len(d.get_positive_sents()))

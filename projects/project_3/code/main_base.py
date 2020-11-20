@@ -14,4 +14,5 @@ if __name__ == '__main__':
     sp = SentimentPipeline(parser, data)
     # sp.print_lexica()
     sp.run_pipeline()
-
+    print()
+    print("The results are saved in the file 'saved_results/Good.txt' and 'saved_results/False.txt'.")
