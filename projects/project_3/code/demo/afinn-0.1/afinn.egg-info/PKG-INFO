@@ -1,0 +1,16 @@
+Metadata-Version: 1.1
+Name: afinn
+Version: 0.1
+Summary: AFINN sentiment analysis
+Home-page: https://github.com/fnielsen/afinn
+Author: Finn Aarup Nielsen
+Author-email: faan@dtu.dk
+License: GPL
+Description: UNKNOWN
+Keywords: sentiment analysis
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 2.6
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3.3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
