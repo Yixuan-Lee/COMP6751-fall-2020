@@ -1,4 +1,4 @@
-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
 ReadMe
 
 Assignment number: 3
@@ -26,7 +26,7 @@ Note:
 The output files ("Good.txt", "False.txt") will be saved in the 
 "code/saved_results/" direcotry.
 
-Good.txt are provided in the same directory as README.txt and all sentences 
-are labeled correctly, but limitations are discussed in the main report 1.
+Good.txt and False.txt are provided in the same directory as README.txt and 
+all sentences are labeled correctly, therefore False.txt is provided but empty.
 
-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
