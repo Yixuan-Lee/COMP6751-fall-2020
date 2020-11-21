@@ -48,6 +48,7 @@ class SentimentPipeline:
         try:
             # clear the previous result files
             self.parser.clear_directory()
+
             # tokenization + pos tagging
             # positive sentences
             for pos_sent in self.lexica.get_positive_sents():

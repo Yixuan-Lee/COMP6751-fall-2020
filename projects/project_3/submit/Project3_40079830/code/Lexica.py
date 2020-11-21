@@ -12,7 +12,7 @@ class DataLoader:
         self.neutral_sentences = []
 
         # response = input('Are you going to use default testing files? (Y/N) ')
-        response = "Yes"
+        response = "yes"
         if response.lower() == 'y' or response.lower() == 'yes':
             positive_filepath = 'data/positive.txt'
             negative_filepath = 'data/negative.txt'
