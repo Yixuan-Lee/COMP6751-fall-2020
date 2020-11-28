@@ -4,6 +4,7 @@ from Parser import SentParser
 from Lexica import DataLoader
 from typing import List, Tuple, Dict, Any
 from collections import Counter
+from Baseline_SSAP import SSAP
 
 
 class SentimentPipeline:
@@ -21,6 +22,7 @@ class SentimentPipeline:
         self.false_negative = 0
         self.true_neutral = 0
         self.false_neutral = 0
+        self.baseline = SSAP()
 
     def part_of_speech_tagging(self, words: List[str]) -> List[Tuple[str, str]]:
         """
@@ -59,6 +61,8 @@ class SentimentPipeline:
                 senti, trees = self.parse_and_sentify(words)
                 # write the sentencee and the ground-truth and the prediction to a result file
                 self.output_results(pos_sent, 'positive', senti, trees)
+                # run ssap baseline
+                self.baseline.predict(pos_sent, 'positive')
             # negative sentences
             for neg_sent in self.lexica.get_negative_sents():
                 words = word_tokenize(neg_sent)
@@ -68,6 +72,8 @@ class SentimentPipeline:
                 senti, trees = self.parse_and_sentify(words)
                 # write the ground-truth and prediction to a result file
                 self.output_results(neg_sent, 'negative', senti, trees)
+                # run ssap baseline
+                self.baseline.predict(neg_sent, 'negative')
             # neutral sentences
             for neu_sent in self.lexica.get_neutral_sents():
                 words = word_tokenize(neu_sent)
@@ -77,6 +83,8 @@ class SentimentPipeline:
                 senti, trees = self.parse_and_sentify(words)
                 # write the ground-truth and prediction to a result file
                 self.output_results(neu_sent, 'neutral', senti, trees)
+                # run ssap baseline
+                self.baseline.predict(neu_sent, 'neutral')
         except Exception as ex:
             print(ex.args[0])
 
@@ -148,8 +156,10 @@ class SentimentPipeline:
         precision = self.true_positive / (self.true_positive + self.false_positive)
         f1_score = (precision * recall) / (precision + recall)
         print('True Negative =', self.true_negative)
+        print('True Neutral =', self.true_neutral)
         print('True Positive =', self.true_positive)
         print('False Negative =', self.false_negative)
+        print('False Neutral =', self.false_neutral)
         print('False Positive =', self.false_negative)
         print('Precision =', precision)
         print('Recall =', recall)
