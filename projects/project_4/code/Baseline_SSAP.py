@@ -32,6 +32,7 @@ class SSAP:
         # Word splitter pattern
         self.pattern_split = re.compile(r"\W+")
 
+        self.polarity = []
         # performance
         self.true_positive = 0
         self.false_positive = 0
@@ -51,7 +52,13 @@ class SSAP:
         if sentiments:
             # How should you weight the individual word sentiments?
             # You could do N, sqrt(N) or 1 for example. Here I use sqrt(N)
-            sentiment = float(sum(sentiments)) / math.sqrt(len(sentiments))
+            numerator = sum(sentiments)
+            ssum = len(sentiments)
+            if ssum == 0:
+                sentiment = 0
+            else:
+                denominator = math.sqrt(ssum)
+                sentiment = float(numerator) / denominator
         else:
             sentiment = 0
         return sentiment
@@ -80,19 +87,22 @@ class SSAP:
             elif sentiment_score < 0:
                 self.true_negative += 1
 
+        self.polarity.append(sentiment_score)
+
     def performance(self):
-        recall = self.true_positive / (self.true_positive + self.false_negative)
-        precision = self.true_positive / (self.true_positive + self.false_positive)
-        f1_score = (precision * recall) / (precision + recall)
+        # recall = self.true_positive / (self.true_positive + self.false_negative)
+        # precision = self.true_positive / (self.true_positive + self.false_positive)
+        # f1_score = (precision * recall) / (precision + recall)
         print('True Negative =', self.true_negative)
         print('True Neutral =', self.true_neutral)
         print('True Positive =', self.true_positive)
         print('False Negative =', self.false_negative)
         print('False Neutral =', self.false_neutral)
-        print('False Positive =', self.false_negative)
-        print('Precision =', precision)
-        print('Recall =', recall)
-        print('F1 measure =', f1_score)
+        print('False Positive =', self.false_positive)
+        # print('Precision =', precision)
+        # print('Recall =', recall)
+        # print('F1 measure =', f1_score)
+        print('SSAP polarity prediction:', self.polarity)
 
 
 # testing SSAP baseline

@@ -53,6 +53,7 @@ class SentimentPipeline:
 
             # tokenization + pos tagging
             # positive sentences
+            # '''
             for pos_sent in self.lexica.get_positive_sents():
                 words = word_tokenize(pos_sent)
                 pos = self.part_of_speech_tagging(words)
@@ -63,6 +64,8 @@ class SentimentPipeline:
                 self.output_results(pos_sent, 'positive', senti, trees)
                 # run ssap baseline
                 self.baseline.predict(pos_sent, 'positive')
+            # '''
+            # '''
             # negative sentences
             for neg_sent in self.lexica.get_negative_sents():
                 words = word_tokenize(neg_sent)
@@ -74,6 +77,8 @@ class SentimentPipeline:
                 self.output_results(neg_sent, 'negative', senti, trees)
                 # run ssap baseline
                 self.baseline.predict(neg_sent, 'negative')
+            # '''
+            # '''
             # neutral sentences
             for neu_sent in self.lexica.get_neutral_sents():
                 words = word_tokenize(neu_sent)
@@ -85,6 +90,7 @@ class SentimentPipeline:
                 self.output_results(neu_sent, 'neutral', senti, trees)
                 # run ssap baseline
                 self.baseline.predict(neu_sent, 'neutral')
+            # '''
         except Exception as ex:
             print(ex.args[0])
 
@@ -100,7 +106,8 @@ class SentimentPipeline:
         :param ground_truth: ground-truth label
         :param label: prediction label
         """
-        if ground_truth in [label[0] for label in labels]:
+        # if ground_truth in [label[0] for label in labels]:
+        if len(labels) == 1 and ground_truth == labels[0][0]:
             # write the sentence and the ground_truth and label to Good.txt
             with open("saved_results/Good.txt", "a+") as writer:
                 # write the input sentence
@@ -144,26 +151,27 @@ class SentimentPipeline:
                     writer.write('\r\n')
                 writer.write('-------------------------------------------------------------------\r\n')
             # record performance
-            if 'negative' in labels:
-                self.false_negative += 1
-            if 'positive' in labels:
-                self.false_positive += 1
-            if 'neutral' in labels:
-                self.false_neutral += 1
+            for pred, cnt in labels:
+                if pred == 'negative' and pred != ground_truth and pred in [label[0] for label in labels]:
+                    self.false_negative += 1
+                elif pred == 'positive' and pred != ground_truth and pred in [label[0] for label in labels]:
+                    self.false_positive += 1
+                elif pred == 'neutral' and pred != ground_truth and pred in [label[0] for label in labels]:
+                    self.false_neutral += 1
 
     def performance(self) -> None:
-        recall = self.true_positive / (self.true_positive + self.false_negative)
-        precision = self.true_positive / (self.true_positive + self.false_positive)
-        f1_score = (precision * recall) / (precision + recall)
+        # recall = self.true_positive / (self.true_positive + self.false_negative)
+        # precision = self.true_positive / (self.true_positive + self.false_positive)
+        # f1_score = (precision * recall) / (precision + recall)
         print('True Negative =', self.true_negative)
         print('True Neutral =', self.true_neutral)
         print('True Positive =', self.true_positive)
         print('False Negative =', self.false_negative)
         print('False Neutral =', self.false_neutral)
-        print('False Positive =', self.false_negative)
-        print('Precision =', precision)
-        print('Recall =', recall)
-        print('F1 measure =', f1_score)
+        print('False Positive =', self.false_positive)
+        # print('Precision =', precision)
+        # print('Recall =', recall)
+        # print('F1 measure =', f1_score)
 
     def print_lexica(self):
         print('positive sentences:')
