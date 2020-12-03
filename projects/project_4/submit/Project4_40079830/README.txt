@@ -29,4 +29,7 @@ The output files ("Good.txt", "False.txt") will be saved in the
 Good.txt, False.txt and sentianalysis_grammar_s.fcfg are provided in the same 
 directory as this README.txt.
 
+The paper that I used to compare the results and referred to is put in paper 
+directory.
+
 -------------------------------------------------------------------------------
