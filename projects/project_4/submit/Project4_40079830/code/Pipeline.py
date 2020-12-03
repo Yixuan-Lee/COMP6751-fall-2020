@@ -53,7 +53,6 @@ class SentimentPipeline:
 
             # tokenization + pos tagging
             # positive sentences
-            # '''
             for pos_sent in self.lexica.get_positive_sents():
                 words = word_tokenize(pos_sent)
                 pos = self.part_of_speech_tagging(words)
@@ -64,8 +63,6 @@ class SentimentPipeline:
                 self.output_results(pos_sent, 'positive', senti, trees)
                 # run ssap baseline
                 self.baseline.predict(pos_sent, 'positive')
-            # '''
-            # '''
             # negative sentences
             for neg_sent in self.lexica.get_negative_sents():
                 words = word_tokenize(neg_sent)
@@ -77,8 +74,6 @@ class SentimentPipeline:
                 self.output_results(neg_sent, 'negative', senti, trees)
                 # run ssap baseline
                 self.baseline.predict(neg_sent, 'negative')
-            # '''
-            # '''
             # neutral sentences
             for neu_sent in self.lexica.get_neutral_sents():
                 words = word_tokenize(neu_sent)
@@ -90,7 +85,6 @@ class SentimentPipeline:
                 self.output_results(neu_sent, 'neutral', senti, trees)
                 # run ssap baseline
                 self.baseline.predict(neu_sent, 'neutral')
-            # '''
         except Exception as ex:
             print(ex.args[0])
 

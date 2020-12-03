@@ -1,7 +1,6 @@
 """
 Reference:
 https://finnaarupnielsen.wordpress.com/2011/06/20/simplest-sentiment-analysis-in-python-with-af/
-
 """
 
 # !/usr/bin/python

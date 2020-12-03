@@ -16,6 +16,7 @@ if __name__ == '__main__':
     sp.run_pipeline()
     print()
     print("The results are saved in the file 'saved_results/Good.txt' and 'saved_results/False.txt'.")
+    print("--------------------------------------------------------------------------------------------")
 
     print()
     print("Baseline SSAP performance:")
