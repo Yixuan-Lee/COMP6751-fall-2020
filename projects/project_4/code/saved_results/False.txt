@@ -9,8 +9,8 @@ negative	|	[positive, negative]
       (DT[NUM='sg'] a)
       (NP[NUM='sg', PERSON=?p, SENTI='positive']
         (JJ[SENTI='positive'] perfect)
-        (NP[NUM='sg', PERSON=?p, SENTI='negative']
-          (NP[NUM='sg', PERSON=?p, SENTI='negative']
+        (NP[NUM='sg', PERSON=?p, SENTI='neutral']
+          (NP[NUM='sg', PERSON=?p, SENTI='neutral']
             (NP[NUM='sg', PERSON=?p, SENTI='neutral']
               (N[NUM='sg', SENTI='neutral'] example))
             (IN[+of, -to] of)
