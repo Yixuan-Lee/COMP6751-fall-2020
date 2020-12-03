@@ -27,7 +27,6 @@
 # IN:
 #   +-of -> of
 
-
 # S expansion productions
 S[SENTI=?s, -INV] -> NP[NUM=?n, PERSON=?p, SENTI=?s] VP[TENSE=?t, NUM=?n, PERSON=?p, SENTI=?s]
 
@@ -166,6 +165,8 @@ PP[SENTI=?s] -> IN[-of] NP[SENTI=?s] | RB[-negation] IN[-of] IN[+of] NP[SENTI=?s
 # ADJP (adjective phrase) expansion productions
 ## e.g. dull and scary and boring
 ADJP[SENTI=?s] -> JJ[SENTI=?s] CC[+and] JJ[SENTI=?s] | JJ[SENTI=?s] CC[+and] ADJP[SENTI=?s]
+ADJP[SENTI=positive] -> JJ[SENTI=positive] CC[+and] JJ[SENTI=neutral] | JJ[SENTI=neutral] CC[+and] JJ[SENTI=positive]
+ADJP[SENTI=negative] -> JJ[SENTI=negative] CC[+and] JJ[SENTI=neutral] | JJ[SENTI=neutral] CC[+and] JJ[SENTI=negative]
 ## e.g. dull, scary and boring
 ADJP[SENTI=?s] -> JJ[SENTI=?s] COMMA ADJP[SENTI=?s]
 ## e.g. well-intentioned but manipulative
