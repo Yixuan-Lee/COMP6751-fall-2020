@@ -1,0 +1,535 @@
+This is a well-intentioned movie making and it is funny or entertaining .
+positive	|	[positive]
+
+(S[-INV, SENTI='positive']
+  (S[-INV, SENTI='positive']
+    (NP[NUM='sg', PERSON=?p, SENTI=?s] (DT[NUM='sg'] This))
+    (VP[NUM='sg', PERSON=3, SENTI='positive', TENSE='pres']
+      (V[+AUX, NUM='sg', PERSON=3, TENSE='pres', -passive] is)
+      (NP[NUM='sg', PERSON=?p, SENTI='positive']
+        (DT[NUM='sg'] a)
+        (NP[NUM='sg', PERSON=?p, SENTI='positive']
+          (JJ[SENTI='positive'] well-intentioned)
+          (NP[NUM='sg', PERSON=?p, SENTI='neutral']
+            (N[NUM='sg', SENTI='neutral'] movie)
+            (NP[NUM='sg', PERSON=?p, SENTI='neutral']
+              (N[NUM='sg', SENTI='neutral'] making)))))))
+  (CC[+and, -but, -or] and)
+  (S[-INV, SENTI='positive']
+    (NP[NUM='sg', PERSON=3, SENTI=?s] (PRP[NUM='sg', PERSON=3] it))
+    (VP[NUM='sg', PERSON=3, SENTI='positive', TENSE='pres']
+      (V[+AUX, NUM='sg', PERSON=3, TENSE='pres', -passive] is)
+      (ADJP[SENTI='positive']
+        (JJ[SENTI='positive'] funny)
+        (CC[-and, -but, +or] or)
+        (JJ[SENTI='positive'] entertaining)))))
+-------------------------------------------------------------------
+This is a well-intentioned movie making and it is funny or entertaining . It is a compelling or fascinating story , and it has gut-wrenching impact .
+positive	|	[positive]
+
+(S[-INV, SENTI='positive']
+  (S[SENTI='positive']
+    (S[-INV, SENTI='positive']
+      (S[-INV, SENTI='positive']
+        (NP[NUM='sg', PERSON=?p, SENTI=?s] (DT[NUM='sg'] This))
+        (VP[NUM='sg', PERSON=3, SENTI='positive', TENSE='pres']
+          (V[+AUX, NUM='sg', PERSON=3, TENSE='pres', -passive] is)
+          (NP[NUM='sg', PERSON=?p, SENTI='positive']
+            (DT[NUM='sg'] a)
+            (NP[NUM='sg', PERSON=?p, SENTI='positive']
+              (JJ[SENTI='positive'] well-intentioned)
+              (NP[NUM='sg', PERSON=?p, SENTI='neutral']
+                (N[NUM='sg', SENTI='neutral'] movie)
+                (NP[NUM='sg', PERSON=?p, SENTI='neutral']
+                  (N[NUM='sg', SENTI='neutral'] making)))))))
+      (CC[+and, -but, -or] and)
+      (S[-INV, SENTI='positive']
+        (NP[NUM='sg', PERSON=3, SENTI=?s]
+          (PRP[NUM='sg', PERSON=3] it))
+        (VP[NUM='sg', PERSON=3, SENTI='positive', TENSE='pres']
+          (V[+AUX, NUM='sg', PERSON=3, TENSE='pres', -passive] is)
+          (ADJP[SENTI='positive']
+            (JJ[SENTI='positive'] funny)
+            (CC[-and, -but, +or] or)
+            (JJ[SENTI='positive'] entertaining)))))
+    (PERIOD[] .)
+    (S[-INV, SENTI='positive']
+      (NP[NUM='sg', PERSON=3, SENTI=?s] (PRP[NUM='sg', PERSON=3] It))
+      (VP[NUM='sg', PERSON=3, SENTI='positive', TENSE='pres']
+        (V[+AUX, NUM='sg', PERSON=3, TENSE='pres', -passive] is)
+        (NP[NUM='sg', PERSON=?p, SENTI='positive']
+          (DT[NUM='sg'] a)
+          (NP[NUM='sg', PERSON=?p, SENTI='positive']
+            (ADJP[SENTI='positive']
+              (JJ[SENTI='positive'] compelling)
+              (CC[-and, -but, +or] or)
+              (JJ[SENTI='positive'] fascinating))
+            (NP[NUM='sg', PERSON=?p, SENTI='neutral']
+              (N[NUM='sg', SENTI='neutral'] story)))))))
+  (COMMA[] ,)
+  (CC[+and, -but, -or] and)
+  (S[-INV, SENTI='neutral']
+    (NP[NUM='sg', PERSON=3, SENTI=?s] (PRP[NUM='sg', PERSON=3] it))
+    (VP[NUM='sg', PERSON=3, SENTI='neutral', TENSE='pres']
+      (V[+AUX, NUM='sg', PERSON=3, TENSE='pres', -passive] has)
+      (NP[NUM='sg', PERSON=?p, SENTI='neutral']
+        (JJ[SENTI='neutral'] gut-wrenching)
+        (NP[NUM='sg', PERSON=?p, SENTI='neutral']
+          (N[NUM='sg', SENTI='neutral'] impact))))))
+-------------------------------------------------------------------
+This is a well-intentioned movie making and it is not boring but interesting or entertaining .
+positive	|	[positive]
+
+(S[-INV, SENTI='positive']
+  (S[-INV, SENTI='positive']
+    (NP[NUM='sg', PERSON=?p, SENTI=?s] (DT[NUM='sg'] This))
+    (VP[NUM='sg', PERSON=3, SENTI='positive', TENSE='pres']
+      (V[+AUX, NUM='sg', PERSON=3, TENSE='pres', -passive] is)
+      (NP[NUM='sg', PERSON=?p, SENTI='positive']
+        (DT[NUM='sg'] a)
+        (NP[NUM='sg', PERSON=?p, SENTI='positive']
+          (JJ[SENTI='positive'] well-intentioned)
+          (NP[NUM='sg', PERSON=?p, SENTI='neutral']
+            (N[NUM='sg', SENTI='neutral'] movie)
+            (NP[NUM='sg', PERSON=?p, SENTI='neutral']
+              (N[NUM='sg', SENTI='neutral'] making)))))))
+  (CC[+and, -but, -or] and)
+  (S[-INV, SENTI='neutral']
+    (NP[NUM='sg', PERSON=3, SENTI=?s] (PRP[NUM='sg', PERSON=3] it))
+    (VP[NUM='sg', PERSON=3, SENTI='neutral', TENSE='pres']
+      (V[+AUX, NUM='sg', PERSON=3, TENSE='pres', -passive] is)
+      (RB[+negation] not)
+      (ADJP[SENTI='positive']
+        (JJ[SENTI='negative'] boring)
+        (CC[-and, +but, -or] but)
+        (ADJP[SENTI='positive']
+          (JJ[SENTI='positive'] interesting)
+          (CC[-and, -but, +or] or)
+          (JJ[SENTI='positive'] entertaining))))))
+-------------------------------------------------------------------
+This may not have the dramatic gut-wrenching impact of other holocaust films , but it's a compelling and entertaining story , mainly because of the way it's told by the people who were there .
+positive	|	[positive]
+
+(S[-INV, SENTI='positive']
+  (S[-INV, SENTI=?s]
+    (NP[NUM='sg', PERSON=?p, SENTI=?s] (DT[NUM='sg'] This))
+    (VP[NUM='sg', PERSON=?p, SENTI=?s, TENSE='inf']
+      (V[+AUX, TENSE='inf', -passive] may)
+      (RB[+negation] not)
+      (VP[NUM='sg', PERSON=?p, SENTI='neutral', TENSE='inf']
+        (V[-AUX, SUBCAT='trans', TENSE='inf', -passive] have)
+        (NP[NUM='sg', PERSON=?p, SENTI='neutral']
+          (NP[NUM='sg', PERSON=?p, SENTI='neutral']
+            (DT[NUM='sg'] the)
+            (NP[NUM='sg', PERSON=?p, SENTI='neutral']
+              (JJ[SENTI='neutral'] dramatic)
+              (NP[NUM='sg', PERSON=?p, SENTI='neutral']
+                (JJ[SENTI='neutral'] gut-wrenching)
+                (NP[NUM='sg', PERSON=?p, SENTI='neutral']
+                  (N[NUM='sg', SENTI='neutral'] impact)))))
+          (IN[+of, -to] of)
+          (NP[NUM='pl', PERSON=?p, SENTI='neutral']
+            (JJ[SENTI='neutral'] other)
+            (NP[NUM='pl', PERSON=?p, SENTI='neutral']
+              (N[NUM='sg', SENTI='negative'] holocaust)
+              (NP[NUM='pl', PERSON=?p, SENTI='neutral']
+                (N[NUM='pl', SENTI='neutral'] films))))))))
+  (COMMA[] ,)
+  (CC[-and, +but, -or] but)
+  (S[-INV, SENTI='positive']
+    (NP[NUM='sg', PERSON=3, SENTI=?s] (PRP[NUM='sg', PERSON=3] it))
+    (VP[NUM='sg', PERSON=3, SENTI='positive', TENSE='pres']
+      (V[+AUX, NUM='sg', PERSON=3, TENSE='pres', -passive] 's)
+      (NP[NUM='sg', PERSON=?p, SENTI='positive']
+        (DT[NUM='sg'] a)
+        (NP[NUM='sg', PERSON=?p, SENTI='positive']
+          (ADJP[SENTI='positive']
+            (JJ[SENTI='positive'] compelling)
+            (CC[+and, -but, -or] and)
+            (JJ[SENTI='positive'] entertaining))
+          (NP[NUM='sg', PERSON=?p, SENTI='neutral']
+            (N[NUM='sg', SENTI='neutral'] story))))
+      (COMMA[] ,)
+      (PP[SENTI='neutral']
+        (RB[SENTI='neutral', -negation] mainly)
+        (IN[-of, -to] because)
+        (IN[+of, -to] of)
+        (NP[NUM='sg', PERSON=?p, SENTI='neutral']
+          (NP[NUM='sg', PERSON=?p, SENTI='neutral']
+            (DT[NUM='sg'] the)
+            (NP[NUM='sg', PERSON=?p, SENTI='neutral']
+              (N[NUM='sg', SENTI='neutral'] way)))
+          (SBAR[SENTI='neutral']
+            (S[-INV, SENTI=?s]
+              (NP[NUM='sg', PERSON=3, SENTI=?s]
+                (PRP[NUM='sg', PERSON=3] it))
+              (VP[NUM='sg', PERSON=3, SENTI=?s, TENSE='pres']
+                (V[+AUX, NUM='sg', PERSON=3, TENSE='pres', -passive]
+                  's)
+                (V[-AUX, SUBCAT='trans', +passive] told)
+                (PP[SENTI=?s]
+                  (IN[-of, -to] by)
+                  (NP[NUM='sg', PERSON=?p, SENTI=?s]
+                    (DT[NUM='sg'] the)))))
+            (SBAR[SENTI='neutral']
+              (S[-INV, SENTI='neutral']
+                (NP[NUM='pl', PERSON=?p, SENTI='neutral']
+                  (N[NUM='pl', SENTI='neutral'] people)))
+              (SBAR[SENTI=?s]
+                (WP[+wh] who)
+                (V[+AUX, NUM='pl', TENSE='past', -passive] were)
+                (NP[NUM=?n, PERSON=?p, SENTI=?s] (EX[] there))))))))))
+-------------------------------------------------------------------
+This is a perfect example of well-intentioned movie making . It's a compelling story with gut-wrenching impact , and it is entertaining or interesting but not too long. I like this movie very much .
+positive	|	[positive]
+
+(S[SENTI='positive']
+  (S[SENTI='positive']
+    (S[-INV, SENTI='positive']
+      (NP[NUM='sg', PERSON=?p, SENTI=?s] (DT[NUM='sg'] This))
+      (VP[NUM='sg', PERSON=3, SENTI='positive', TENSE='pres']
+        (V[+AUX, NUM='sg', PERSON=3, TENSE='pres', -passive] is)
+        (NP[NUM='sg', PERSON=?p, SENTI='positive']
+          (NP[NUM='sg', PERSON=?p, SENTI='positive']
+            (DT[NUM='sg'] a)
+            (NP[NUM='sg', PERSON=?p, SENTI='positive']
+              (JJ[SENTI='positive'] perfect)
+              (NP[NUM='sg', PERSON=?p, SENTI='neutral']
+                (N[NUM='sg', SENTI='neutral'] example))))
+          (IN[+of, -to] of)
+          (NP[NUM='sg', PERSON=?p, SENTI='positive']
+            (JJ[SENTI='positive'] well-intentioned)
+            (NP[NUM='sg', PERSON=?p, SENTI='neutral']
+              (N[NUM='sg', SENTI='neutral'] movie)
+              (NP[NUM='sg', PERSON=?p, SENTI='neutral']
+                (N[NUM='sg', SENTI='neutral'] making)))))))
+    (PERIOD[] .)
+    (S[-INV, SENTI='positive']
+      (S[-INV, SENTI='neutral']
+        (NP[NUM='sg', PERSON=3, SENTI=?s]
+          (PRP[NUM='sg', PERSON=3] It))
+        (VP[NUM='sg', PERSON=3, SENTI='neutral', TENSE='pres']
+          (V[+AUX, NUM='sg', PERSON=3, TENSE='pres', -passive] 's)
+          (NP[NUM='sg', PERSON=?p, SENTI='neutral']
+            (DT[NUM='sg'] a)
+            (NP[NUM='sg', PERSON=?p, SENTI='positive']
+              (JJ[SENTI='positive'] compelling)
+              (NP[NUM='sg', PERSON=?p, SENTI='neutral']
+                (N[NUM='sg', SENTI='neutral'] story)))
+            (PP[SENTI='neutral']
+              (IN[-of, -to] with)
+              (NP[NUM='sg', PERSON=?p, SENTI='neutral']
+                (JJ[SENTI='neutral'] gut-wrenching)
+                (NP[NUM='sg', PERSON=?p, SENTI='neutral']
+                  (N[NUM='sg', SENTI='neutral'] impact)))))))
+      (COMMA[] ,)
+      (CC[+and, -but, -or] and)
+      (S[-INV, SENTI='positive']
+        (NP[NUM='sg', PERSON=3, SENTI=?s]
+          (PRP[NUM='sg', PERSON=3] it))
+        (VP[NUM='sg', PERSON=3, SENTI='positive', TENSE='pres']
+          (V[+AUX, NUM='sg', PERSON=3, TENSE='pres', -passive] is)
+          (ADJP[SENTI='positive']
+            (ADJP[SENTI='positive']
+              (JJ[SENTI='positive'] entertaining)
+              (CC[-and, -but, +or] or)
+              (JJ[SENTI='positive'] interesting))
+            (CC[-and, +but, -or] but)
+            (RB[+negation] not)
+            (ADJP[SENTI='neutral']
+              (RB[SENTI='neutral', -negation] too)
+              (JJ[SENTI='neutral'] long)))))))
+  (PERIOD[] .)
+  (S[-INV, SENTI='neutral']
+    (NP[NUM='sg', PERSON=1, SENTI=?s] (PRP[NUM='sg', PERSON=1] I))
+    (VP[NUM='sg', PERSON=1, SENTI='neutral', TENSE='pres']
+      (V[-AUX, NUM='sg', PERSON=1, TENSE='pres', -passive] like)
+      (NP[NUM='sg', PERSON=?p, SENTI='neutral']
+        (DT[NUM='sg'] this)
+        (NP[NUM='sg', PERSON=?p, SENTI='neutral']
+          (N[NUM='sg', SENTI='neutral'] movie)))
+      (ADVP[]
+        (RB[SENTI='neutral', -negation] very)
+        (RB[SENTI='neutral', -negation] much)))))
+-------------------------------------------------------------------
+I saw an entertaining but scary movie and it is a long story .
+negative	|	[negative]
+
+(S[-INV, SENTI='negative']
+  (S[-INV, SENTI='negative']
+    (NP[NUM='sg', PERSON=1, SENTI=?s] (PRP[NUM='sg', PERSON=1] I))
+    (VP[NUM='sg', PERSON=?p, SENTI='negative', TENSE='past']
+      (V[-AUX, SUBCAT='trans', TENSE='past', -passive] saw)
+      (NP[NUM='sg', PERSON=?p, SENTI='negative']
+        (DT[NUM='sg'] an)
+        (NP[NUM='sg', PERSON=?p, SENTI='negative']
+          (ADJP[SENTI='negative']
+            (JJ[SENTI='positive'] entertaining)
+            (CC[-and, +but, -or] but)
+            (JJ[SENTI='negative'] scary))
+          (NP[NUM='sg', PERSON=?p, SENTI='neutral']
+            (N[NUM='sg', SENTI='neutral'] movie))))))
+  (CC[+and, -but, -or] and)
+  (S[-INV, SENTI='neutral']
+    (NP[NUM='sg', PERSON=3, SENTI=?s] (PRP[NUM='sg', PERSON=3] it))
+    (VP[NUM='sg', PERSON=3, SENTI='neutral', TENSE='pres']
+      (V[+AUX, NUM='sg', PERSON=3, TENSE='pres', -passive] is)
+      (NP[NUM='sg', PERSON=?p, SENTI='neutral']
+        (DT[NUM='sg'] a)
+        (NP[NUM='sg', PERSON=?p, SENTI='neutral']
+          (JJ[SENTI='neutral'] long)
+          (NP[NUM='sg', PERSON=?p, SENTI='neutral']
+            (N[NUM='sg', SENTI='neutral'] story)))))))
+-------------------------------------------------------------------
+I saw a dramatic but scary movie and it is a long story . It was a mess and a shamelessly manipulative or boring movie making .
+negative	|	[negative]
+
+(S[-INV, SENTI='negative']
+  (S[SENTI='negative']
+    (S[-INV, SENTI='negative']
+      (S[-INV, SENTI='negative']
+        (NP[NUM='sg', PERSON=1, SENTI=?s]
+          (PRP[NUM='sg', PERSON=1] I))
+        (VP[NUM='sg', PERSON=?p, SENTI='negative', TENSE='past']
+          (V[-AUX, SUBCAT='trans', TENSE='past', -passive] saw)
+          (NP[NUM='sg', PERSON=?p, SENTI='negative']
+            (DT[NUM='sg'] a)
+            (NP[NUM='sg', PERSON=?p, SENTI='negative']
+              (ADJP[SENTI='negative']
+                (JJ[SENTI='neutral'] dramatic)
+                (CC[-and, +but, -or] but)
+                (JJ[SENTI='negative'] scary))
+              (NP[NUM='sg', PERSON=?p, SENTI='neutral']
+                (N[NUM='sg', SENTI='neutral'] movie))))))
+      (CC[+and, -but, -or] and)
+      (S[-INV, SENTI='neutral']
+        (NP[NUM='sg', PERSON=3, SENTI=?s]
+          (PRP[NUM='sg', PERSON=3] it))
+        (VP[NUM='sg', PERSON=3, SENTI='neutral', TENSE='pres']
+          (V[+AUX, NUM='sg', PERSON=3, TENSE='pres', -passive] is)
+          (NP[NUM='sg', PERSON=?p, SENTI='neutral']
+            (DT[NUM='sg'] a)
+            (NP[NUM='sg', PERSON=?p, SENTI='neutral']
+              (JJ[SENTI='neutral'] long)
+              (NP[NUM='sg', PERSON=?p, SENTI='neutral']
+                (N[NUM='sg', SENTI='neutral'] story)))))))
+    (PERIOD[] .)
+    (S[-INV, SENTI='negative']
+      (NP[NUM='sg', PERSON=3, SENTI=?s] (PRP[NUM='sg', PERSON=3] It))
+      (VP[NUM='sg', PERSON=?p, SENTI='negative', TENSE='past']
+        (V[+AUX, NUM='sg', TENSE='past', -passive] was)
+        (NP[NUM='sg', PERSON=?p, SENTI='negative']
+          (DT[NUM='sg'] a)
+          (NP[NUM='sg', PERSON=?p, SENTI='negative']
+            (N[NUM='sg', SENTI='negative'] mess))))))
+  (CC[+and, -but, -or] and)
+  (S[-INV, SENTI='negative']
+    (NP[NUM='sg', PERSON=?p, SENTI='negative']
+      (DT[NUM='sg'] a)
+      (NP[NUM='sg', PERSON=?p, SENTI='negative']
+        (ADJP[SENTI='negative']
+          (RB[SENTI='negative', -negation] shamelessly)
+          (ADJP[SENTI='negative']
+            (JJ[SENTI='negative'] manipulative)
+            (CC[-and, -but, +or] or)
+            (JJ[SENTI='negative'] boring)))
+        (NP[NUM='sg', PERSON=?p, SENTI='neutral']
+          (N[NUM='sg', SENTI='neutral'] movie)
+          (NP[NUM='sg', PERSON=?p, SENTI='neutral']
+            (N[NUM='sg', SENTI='neutral'] making)))))))
+-------------------------------------------------------------------
+This was a well-intentioned but manipulative movie making which was not interesting or entertaining .
+negative	|	[negative]
+
+(S[-INV, SENTI='negative']
+  (NP[NUM='sg', PERSON=?p, SENTI=?s] (DT[NUM='sg'] This))
+  (VP[NUM='sg', PERSON=?p, SENTI='negative', TENSE='past']
+    (V[+AUX, NUM='sg', TENSE='past', -passive] was)
+    (NP[NUM='sg', PERSON=?p, SENTI='negative']
+      (NP[NUM='sg', PERSON=?p, SENTI='negative']
+        (DT[NUM='sg'] a)
+        (NP[NUM='sg', PERSON=?p, SENTI='negative']
+          (ADJP[SENTI='negative']
+            (JJ[SENTI='positive'] well-intentioned)
+            (CC[-and, +but, -or] but)
+            (JJ[SENTI='negative'] manipulative))
+          (NP[NUM='sg', PERSON=?p, SENTI='neutral']
+            (N[NUM='sg', SENTI='neutral'] movie)
+            (NP[NUM='sg', PERSON=?p, SENTI='neutral']
+              (N[NUM='sg', SENTI='neutral'] making)))))
+      (SBAR[SENTI='negative']
+        (WP[+wh] which)
+        (V[+AUX, NUM='sg', TENSE='past', -passive] was)
+        (RB[+negation] not)
+        (ADJP[SENTI='positive']
+          (JJ[SENTI='positive'] interesting)
+          (CC[-and, -but, +or] or)
+          (JJ[SENTI='positive'] entertaining))))))
+-------------------------------------------------------------------
+He was disappointed because he saw a movie which was not interesting or entertaining. He said that it's a classic example of rancid , well-intentioned , but shamelessly manipulative movie making .
+negative	|	[negative]
+
+(S[SENTI='negative']
+  (S[-INV, SENTI='negative']
+    (S[-INV, SENTI='negative']
+      (NP[NUM='sg', PERSON=3, SENTI=?s] (PRP[NUM='sg', PERSON=3] He))
+      (VP[NUM='sg', PERSON=?p, SENTI='negative', TENSE='past']
+        (V[+AUX, NUM='sg', TENSE='past', -passive] was)
+        (JJ[SENTI='negative'] disappointed)))
+    (CC[-and, -but, -or] because)
+    (S[-INV, SENTI='neutral']
+      (NP[NUM='sg', PERSON=3, SENTI=?s] (PRP[NUM='sg', PERSON=3] he))
+      (VP[NUM='sg', PERSON=?p, SENTI='neutral', TENSE='past']
+        (V[-AUX, SUBCAT='trans', TENSE='past', -passive] saw)
+        (NP[NUM='sg', PERSON=?p, SENTI='neutral']
+          (NP[NUM='sg', PERSON=?p, SENTI='neutral']
+            (DT[NUM='sg'] a)
+            (NP[NUM='sg', PERSON=?p, SENTI='neutral']
+              (N[NUM='sg', SENTI='neutral'] movie)))
+          (SBAR[SENTI='negative']
+            (WP[+wh] which)
+            (V[+AUX, NUM='sg', TENSE='past', -passive] was)
+            (RB[+negation] not)
+            (ADJP[SENTI='positive']
+              (JJ[SENTI='positive'] interesting)
+              (CC[-and, -but, +or] or)
+              (JJ[SENTI='positive'] entertaining)))))))
+  (PERIOD[] .)
+  (S[SENTI='negative']
+    (PRP[NUM='sg', PERSON=3] He)
+    (V[-AUX, SUBCAT='trans', TENSE='past', -passive] said)
+    (INTRO[] that)
+    (S[-INV, SENTI='negative']
+      (NP[NUM='sg', PERSON=3, SENTI=?s] (PRP[NUM='sg', PERSON=3] it))
+      (VP[NUM='sg', PERSON=3, SENTI='negative', TENSE='pres']
+        (V[+AUX, NUM='sg', PERSON=3, TENSE='pres', -passive] 's)
+        (NP[NUM='sg', PERSON=?p, SENTI='negative']
+          (NP[NUM='sg', PERSON=?p, SENTI='neutral']
+            (DT[NUM='sg'] a)
+            (NP[NUM='sg', PERSON=?p, SENTI='neutral']
+              (JJ[SENTI='neutral'] classic)
+              (NP[NUM='sg', PERSON=?p, SENTI='neutral']
+                (N[NUM='sg', SENTI='neutral'] example))))
+          (IN[+of, -to] of)
+          (NP[NUM='sg', PERSON=?p, SENTI='negative']
+            (ADJP[SENTI='negative']
+              (JJ[SENTI='negative'] rancid)
+              (COMMA[] ,)
+              (ADJP[SENTI='negative']
+                (JJ[SENTI='positive'] well-intentioned)
+                (COMMA[] ,)
+                (CC[-and, +but, -or] but)
+                (ADJP[SENTI='negative']
+                  (RB[SENTI='negative', -negation] shamelessly)
+                  (JJ[SENTI='negative'] manipulative))))
+            (NP[NUM='sg', PERSON=?p, SENTI='neutral']
+              (N[NUM='sg', SENTI='neutral'] movie)
+              (NP[NUM='sg', PERSON=?p, SENTI='neutral']
+                (N[NUM='sg', SENTI='neutral'] making)))))))))
+-------------------------------------------------------------------
+This is an neutral or general game .
+neutral	|	[neutral]
+
+(S[-INV, SENTI='neutral']
+  (NP[NUM='sg', PERSON=?p, SENTI=?s] (DT[NUM='sg'] This))
+  (VP[NUM='sg', PERSON=3, SENTI='neutral', TENSE='pres']
+    (V[+AUX, NUM='sg', PERSON=3, TENSE='pres', -passive] is)
+    (NP[NUM='sg', PERSON=?p, SENTI='neutral']
+      (DT[NUM='sg'] an)
+      (NP[NUM='sg', PERSON=?p, SENTI='neutral']
+        (ADJP[SENTI='neutral']
+          (JJ[SENTI='neutral'] neutral)
+          (CC[-and, -but, +or] or)
+          (JJ[SENTI='neutral'] general))
+        (NP[NUM='sg', PERSON=?p, SENTI='neutral']
+          (N[NUM='sg', SENTI='neutral'] game))))))
+-------------------------------------------------------------------
+This is a movie review, and it is not positive or negative . It is quite neutral .
+neutral	|	[neutral]
+
+(S[SENTI='neutral']
+  (S[-INV, SENTI='neutral']
+    (S[-INV, SENTI='neutral']
+      (NP[NUM='sg', PERSON=?p, SENTI=?s] (DT[NUM='sg'] This))
+      (VP[NUM='sg', PERSON=3, SENTI='neutral', TENSE='pres']
+        (V[+AUX, NUM='sg', PERSON=3, TENSE='pres', -passive] is)
+        (NP[NUM='sg', PERSON=?p, SENTI='neutral']
+          (DT[NUM='sg'] a)
+          (NP[NUM='sg', PERSON=?p, SENTI='neutral']
+            (N[NUM='sg', SENTI='neutral'] movie)
+            (NP[NUM='sg', PERSON=?p, SENTI='neutral']
+              (N[NUM='sg', SENTI='neutral'] review))))))
+    (COMMA[] ,)
+    (CC[+and, -but, -or] and)
+    (S[-INV, SENTI='neutral']
+      (NP[NUM='sg', PERSON=3, SENTI=?s] (PRP[NUM='sg', PERSON=3] it))
+      (VP[NUM='sg', PERSON=3, SENTI='neutral', TENSE='pres']
+        (V[+AUX, NUM='sg', PERSON=3, TENSE='pres', -passive] is)
+        (RB[+negation] not)
+        (ADJP[SENTI='neutral']
+          (JJ[SENTI='positive'] positive)
+          (CC[-and, -but, +or] or)
+          (JJ[SENTI='negative'] negative)))))
+  (PERIOD[] .)
+  (S[-INV, SENTI='neutral']
+    (NP[NUM='sg', PERSON=3, SENTI=?s] (PRP[NUM='sg', PERSON=3] It))
+    (VP[NUM='sg', PERSON=3, SENTI='neutral', TENSE='pres']
+      (V[+AUX, NUM='sg', PERSON=3, TENSE='pres', -passive] is)
+      (ADJP[SENTI='neutral']
+        (RB[SENTI='neutral', -negation] quite)
+        (JJ[SENTI='neutral'] neutral)))))
+-------------------------------------------------------------------
+There are many cars which have different colors on the street , but the color of this car is black and it is not cheap but expensive .
+neutral	|	[neutral]
+
+(S[-INV, SENTI='neutral']
+  (S[-INV, SENTI='neutral']
+    (S[-INV, SENTI='neutral']
+      (NP[NUM=?n, PERSON=?p, SENTI=?s] (EX[] There))
+      (VP[NUM='pl', PERSON=3, SENTI='neutral', TENSE='pres']
+        (V[+AUX, NUM='pl', PERSON=3, TENSE='pres', -passive] are)
+        (NP[NUM='pl', PERSON=?p, SENTI='neutral']
+          (NP[NUM='pl', PERSON=?p, SENTI='neutral']
+            (JJ[SENTI='neutral'] many)
+            (NP[NUM='pl', PERSON=?p, SENTI='neutral']
+              (N[NUM='pl', SENTI='neutral'] cars)))
+          (SBAR[SENTI='neutral']
+            (WP[+wh] which)
+            (V[-AUX, SUBCAT='trans', TENSE='inf', -passive] have)
+            (NP[NUM='pl', PERSON=?p, SENTI='neutral']
+              (JJ[SENTI='neutral'] different)
+              (NP[NUM='pl', PERSON=?p, SENTI='neutral']
+                (N[NUM='pl', SENTI='neutral'] colors)))))
+        (PP[SENTI='neutral']
+          (IN[-of, -to] on)
+          (NP[NUM='sg', PERSON=?p, SENTI='neutral']
+            (DT[NUM='sg'] the)
+            (NP[NUM='sg', PERSON=?p, SENTI='neutral']
+              (N[NUM='sg', SENTI='neutral'] street))))))
+    (COMMA[] ,)
+    (CC[-and, +but, -or] but)
+    (S[-INV, SENTI='neutral']
+      (NP[NUM='sg', PERSON=?p, SENTI='neutral']
+        (NP[NUM='sg', PERSON=?p, SENTI='neutral']
+          (DT[NUM='sg'] the)
+          (NP[NUM='sg', PERSON=?p, SENTI='neutral']
+            (N[NUM='sg', SENTI='neutral'] color)))
+        (IN[+of, -to] of)
+        (NP[NUM='sg', PERSON=?p, SENTI='neutral']
+          (DT[NUM='sg'] this)
+          (NP[NUM='sg', PERSON=?p, SENTI='neutral']
+            (N[NUM='sg', SENTI='neutral'] car))))
+      (VP[NUM='sg', PERSON=3, SENTI='neutral', TENSE='pres']
+        (V[+AUX, NUM='sg', PERSON=3, TENSE='pres', -passive] is)
+        (JJ[SENTI='neutral'] black))))
+  (CC[+and, -but, -or] and)
+  (S[-INV, SENTI='neutral']
+    (NP[NUM='sg', PERSON=3, SENTI=?s] (PRP[NUM='sg', PERSON=3] it))
+    (VP[NUM='sg', PERSON=3, SENTI='neutral', TENSE='pres']
+      (V[+AUX, NUM='sg', PERSON=3, TENSE='pres', -passive] is)
+      (RB[+negation] not)
+      (ADJP[SENTI='neutral']
+        (JJ[SENTI='neutral'] cheap)
+        (CC[-and, +but, -or] but)
+        (JJ[SENTI='neutral'] expensive)))))
+-------------------------------------------------------------------

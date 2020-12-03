@@ -1,0 +1,76 @@
+It's a perfect example of rancid , well-intentioned , but shamelessly manipulative movie making which is not entertaining and compelling .
+negative	|	[positive, negative]
+
+(S[-INV, SENTI='positive']
+  (NP[NUM='sg', PERSON=3, SENTI=?s] (PRP[NUM='sg', PERSON=3] It))
+  (VP[NUM='sg', PERSON=3, SENTI='positive', TENSE='pres']
+    (V[+AUX, NUM='sg', PERSON=3, TENSE='pres', -passive] 's)
+    (NP[NUM='sg', PERSON=?p, SENTI='positive']
+      (DT[NUM='sg'] a)
+      (NP[NUM='sg', PERSON=?p, SENTI='positive']
+        (JJ[SENTI='positive'] perfect)
+        (NP[NUM='sg', PERSON=?p, SENTI='neutral']
+          (NP[NUM='sg', PERSON=?p, SENTI='neutral']
+            (NP[NUM='sg', PERSON=?p, SENTI='neutral']
+              (N[NUM='sg', SENTI='neutral'] example))
+            (IN[+of, -to] of)
+            (NP[NUM='sg', PERSON=?p, SENTI='negative']
+              (ADJP[SENTI='negative']
+                (JJ[SENTI='negative'] rancid)
+                (COMMA[] ,)
+                (ADJP[SENTI='negative']
+                  (JJ[SENTI='positive'] well-intentioned)
+                  (COMMA[] ,)
+                  (CC[-and, +but, -or] but)
+                  (ADJP[SENTI='negative']
+                    (RB[SENTI='negative', -negation] shamelessly)
+                    (JJ[SENTI='negative'] manipulative))))
+              (NP[NUM='sg', PERSON=?p, SENTI='neutral']
+                (N[NUM='sg', SENTI='neutral'] movie)
+                (NP[NUM='sg', PERSON=?p, SENTI='neutral']
+                  (N[NUM='sg', SENTI='neutral'] making)))))
+          (SBAR[SENTI='negative']
+            (WP[+wh] which)
+            (V[+AUX, NUM='sg', PERSON=3, TENSE='pres', -passive] is)
+            (RB[+negation] not)
+            (ADJP[SENTI='positive']
+              (JJ[SENTI='positive'] entertaining)
+              (CC[+and, -but, -or] and)
+              (JJ[SENTI='positive'] compelling))))))))
+(S[-INV, SENTI='negative']
+  (NP[NUM='sg', PERSON=3, SENTI=?s] (PRP[NUM='sg', PERSON=3] It))
+  (VP[NUM='sg', PERSON=3, SENTI='negative', TENSE='pres']
+    (V[+AUX, NUM='sg', PERSON=3, TENSE='pres', -passive] 's)
+    (NP[NUM='sg', PERSON=?p, SENTI='negative']
+      (NP[NUM='sg', PERSON=?p, SENTI='negative']
+        (NP[NUM='sg', PERSON=?p, SENTI='positive']
+          (DT[NUM='sg'] a)
+          (NP[NUM='sg', PERSON=?p, SENTI='positive']
+            (JJ[SENTI='positive'] perfect)
+            (NP[NUM='sg', PERSON=?p, SENTI='neutral']
+              (N[NUM='sg', SENTI='neutral'] example))))
+        (IN[+of, -to] of)
+        (NP[NUM='sg', PERSON=?p, SENTI='negative']
+          (ADJP[SENTI='negative']
+            (JJ[SENTI='negative'] rancid)
+            (COMMA[] ,)
+            (ADJP[SENTI='negative']
+              (JJ[SENTI='positive'] well-intentioned)
+              (COMMA[] ,)
+              (CC[-and, +but, -or] but)
+              (ADJP[SENTI='negative']
+                (RB[SENTI='negative', -negation] shamelessly)
+                (JJ[SENTI='negative'] manipulative))))
+          (NP[NUM='sg', PERSON=?p, SENTI='neutral']
+            (N[NUM='sg', SENTI='neutral'] movie)
+            (NP[NUM='sg', PERSON=?p, SENTI='neutral']
+              (N[NUM='sg', SENTI='neutral'] making)))))
+      (SBAR[SENTI='negative']
+        (WP[+wh] which)
+        (V[+AUX, NUM='sg', PERSON=3, TENSE='pres', -passive] is)
+        (RB[+negation] not)
+        (ADJP[SENTI='positive']
+          (JJ[SENTI='positive'] entertaining)
+          (CC[+and, -but, -or] and)
+          (JJ[SENTI='positive'] compelling))))))
+-------------------------------------------------------------------
