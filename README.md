@@ -5,4 +5,4 @@ COMP 6751 Natural Language Analysis: labs, quizzes, projects and NLTK study note
 
 # Credits and References
 
-All projects are well-designed by Professor Sabine Bergler. 
+All projects and lab quizzes are designed by Professor Sabine Bergler. NLTK book refers to the [website](http://www.nltk.org/book/).
